@@ -7,7 +7,11 @@
   --var-secondary: #d099d0;
   --var-highlight: #feee00;
   --var-success: #1d8719;
+  --var-success-dark: #0c5309;
+  --var-success-light: #48d643;
   --var-danger: #c90000;
+  --var-danger-dark: #610101;
+  --var-danger-light: #f33b3b;
 }
 
 :root {
@@ -15,7 +19,11 @@
   --var-secondary: #d099d0;
   --var-highlight: #feee00;
   --var-success: #1d8719;
+  --var-success-dark: #0c5309;
+  --var-success-light: #48d643;
   --var-danger: #c90000;
+  --var-danger-dark: #610101;
+  --var-danger-light: #f33b3b;
 }
 
 .loginHeader {
@@ -91,7 +99,21 @@
           box-shadow: -3px 5px var(--var-primary);
 }
 
-.loginContainer .log {
+.loginContainer #errorMsj {
+  display: none;
+  margin-top: 0;
+  text-align: justify;
+  padding: 0.2em;
+  color: var(--var-danger-dark);
+  background-color: var(--var-danger-light);
+  border: solid 1px var(--var-danger);
+}
+
+.loginContainer #errorMsj a {
+  color: black;
+}
+
+.loginContainer .logBtn {
   -ms-flex-item-align: end;
       align-self: flex-end;
   padding: 0.5em;
@@ -100,7 +122,7 @@
   color: white;
 }
 
-.loginContainer .log:hover {
+.loginContainer .logBtn:hover {
   background-color: var(--var-highlight);
   color: black;
   font-weight: bold;
@@ -111,7 +133,11 @@
   --var-secondary: #d099d0;
   --var-highlight: #feee00;
   --var-success: #1d8719;
+  --var-success-dark: #0c5309;
+  --var-success-light: #48d643;
   --var-danger: #c90000;
+  --var-danger-dark: #610101;
+  --var-danger-light: #f33b3b;
 }
 
 form {
@@ -131,7 +157,6 @@ form {
 }
 
 form div {
-  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -139,7 +164,7 @@ form div {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
   width: 350px;
 }
 
@@ -148,6 +173,12 @@ form div label {
   font-size: 1.5em;
   font-weight: 700;
   margin-bottom: 0.5em;
+}
+
+form div p {
+  margin-top: 0;
+  color: white;
+  text-align: justify;
 }
 
 form div .formInput {
@@ -166,6 +197,72 @@ form div .formInput:focus {
   border: var(--var-primary) 1px solid;
   -webkit-box-shadow: -3px 5px var(--var-primary);
           box-shadow: -3px 5px var(--var-primary);
+}
+
+form div .inputError {
+  color: var(--var-danger-dark);
+  background-color: var(--var-danger-light);
+  border: solid 1px var(--var-danger);
+}
+
+form .errorMsj {
+  margin-top: 0;
+  text-align: justify;
+  padding: 0.2em;
+  width: 350px;
+  color: var(--var-danger-dark);
+  background-color: var(--var-danger-light);
+  border: solid 1px var(--var-danger);
+}
+
+form .successMsj {
+  margin-top: 0;
+  text-align: justify;
+  padding: 0.2em;
+  width: 350px;
+  color: var(--var-success-dark);
+  background-color: var(--var-success-light);
+  border: solid 1px var(--var-success);
+}
+
+form #errorMsjTitulo {
+  display: none;
+}
+
+form #errorMsjPrecio {
+  display: none;
+}
+
+form #errorMsjStock {
+  display: none;
+}
+
+form #errorMsjImg {
+  display: none;
+}
+
+form #errorMsjGeneral {
+  display: none;
+}
+
+form #successMsjGeneral {
+  display: none;
+}
+
+form #errorMsjNombreFab {
+  display: none;
+}
+
+form #errorMsjOrigenFab {
+  display: none;
+}
+
+form #errorMsjGeneralFab {
+  display: none;
+}
+
+form #successMsjGeneralFab {
+  display: none;
 }
 
 form .numeros {
@@ -213,7 +310,11 @@ form #submit .formInput:hover {
   --var-secondary: #d099d0;
   --var-highlight: #feee00;
   --var-success: #1d8719;
+  --var-success-dark: #0c5309;
+  --var-success-light: #48d643;
   --var-danger: #c90000;
+  --var-danger-dark: #610101;
+  --var-danger-light: #f33b3b;
 }
 
 .navBar {
@@ -223,7 +324,7 @@ form #submit .formInput:hover {
   display: -ms-flexbox;
   display: flex;
   background-color: var(--var-secondary);
-  padding: 0.8em;
+  padding: 0.5em 0.8em;
 }
 
 .navBar .logo {
@@ -248,8 +349,8 @@ form #submit .formInput:hover {
   height: auto;
 }
 
-.navBar ul {
-  width: 300px;
+.navBar .links {
+  width: 500px;
   margin-left: auto;
   margin-right: auto;
   list-style-type: none;
@@ -260,31 +361,157 @@ form #submit .formInput:hover {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   padding: 0;
+  cursor: pointer;
+}
+
+.navBar .links li {
+  margin-left: 0.5em;
+}
+
+.navBar .links li a {
+  color: black;
+  text-decoration: none;
+}
+
+.navBar .links li:hover {
+  font-weight: 700;
 }
 
 .navBar #user {
-  margin: 0.5em 0;
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .navBar #user #login {
+  display: none;
   padding: 0.5em;
   background-color: black;
-}
-
-.navBar #user #login a {
   text-decoration: none;
   color: white;
 }
 
 .navBar #user #signin {
+  display: none;
   padding: 0.5em;
   background-color: var(--var-highlight);
   font-weight: bold;
-}
-
-.navBar #user #signin a {
   text-decoration: none;
   color: black;
+  margin-left: 0.5em;
+}
+
+.navBar #user #cart {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+
+.navBar #user #cart p {
+  margin-left: 0.2em;
+}
+
+.navBar #user #cart #list {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  top: 50px;
+  left: -185px;
+  width: 200px;
+  font-size: 0.8em;
+  background-color: black;
+  padding: 0 0.3em 0.3em 0.3em;
+}
+
+.navBar #user #cart #list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navBar #user #cart #list ul li {
+  width: 100%;
+  background-color: white;
+  margin-top: 0.3em;
+  cursor: pointer;
+}
+
+.navBar #user #cart #list div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  height: 60px;
+  margin-top: 0.3em;
+  width: 100%;
+  justify-content: flex-end;
+  height: auto;
+}
+
+.navBar #user #cart #list div button {
+  font-size: 1.4em;
+  width: 150px;
+  text-align: center;
+  margin: 0;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+  font-size: 1.05em;
+  width: auto;
+  padding: 0.5em;
+  font-weight: 700;
+}
+
+.navBar #user #cart #list div #finalizarCompra {
+  color: var(--var-success-dark);
+  background-color: var(--var-success-light);
+  border: solid 1px var(--var-success);
+}
+
+.navBar #user #cart #list div #borrarCompra {
+  color: var(--var-danger-dark);
+  background-color: var(--var-danger-light);
+  border: solid 1px var(--var-danger);
+  margin-left: 0.3em;
+}
+
+.navBar #user #profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navBar #user #profile p {
+  margin: 0 0.5em;
+}
+
+.navBar #user #profile .img {
+  height: 50px;
+  width: 50px;
+  background-color: gray;
+  border-radius: 50%;
 }
 
 main {
@@ -292,13 +519,19 @@ main {
   display: -ms-flexbox;
   display: flex;
   margin: 1em;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 main .filters {
   background-color: white;
   margin-right: 1em;
   padding: 1em;
-  height: 50vh;
+}
+
+main .filters h3 {
+  cursor: pointer;
 }
 
 main .filters ul {
@@ -309,6 +542,7 @@ main .filters ul {
 
 main .filters ul li {
   margin-bottom: 0.2em;
+  cursor: pointer;
 }
 
 main .productsContainer {
@@ -327,17 +561,20 @@ main .productsContainer {
 
 main .productsContainer .productsContainer__card {
   width: 100%;
-  background-color: black;
+  height: 190px;
+  background-color: var(--var-highlight);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
+  -webkit-box-shadow: -7px 7px black;
+          box-shadow: -7px 7px black;
 }
 
 main .productsContainer .productsContainer__card .productsContainer__img {
   width: 150px;
-  height: 150px;
-  background-color: gray;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 main .productsContainer .productsContainer__card .productsContainer__text {
@@ -345,16 +582,22 @@ main .productsContainer .productsContainer__card .productsContainer__text {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
   margin: 1em;
-  height: 3px;
-  color: white;
+  color: black;
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 700;
 }
 
-main .productsContainer .productsContainer__card .productsContainer__text h3 {
+main .productsContainer .productsContainer__card .productsContainer__text a {
+  color: black;
+  text-decoration: none;
   margin: 0;
 }
 
@@ -364,12 +607,27 @@ main .productsContainer .productsContainer__card .productsContainer__text p {
 
 main .productsContainer .productsContainer__card .productsContainer__text h4 {
   margin: 0.2em;
-  color: var(--var-highlight);
+  color: var(--var-success);
 }
 
 main .productsContainer .productsContainer__card .productsContainer__text button {
   -ms-flex-item-align: end;
       align-self: flex-end;
+  background-color: var(--var-success);
+  color: black;
+  font-size: 1.4em;
+  width: 150px;
+  text-align: center;
+  margin: 0;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+main .productsContainer .productsContainer__card .productsContainer__text button p {
+  margin: 0;
 }
 
 body {
@@ -509,7 +767,6 @@ header h1 {
   background-color: black;
   color: var(--var-highlight);
   font-size: 1.4em;
-  height: 100%;
   width: 150px;
   text-align: center;
   margin: 0;
@@ -593,14 +850,13 @@ header h1 {
   height: 100vw;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
-  /* Black w/ opacity */
 }
 
 .modal .modal-content {
   background-color: var(--var-highlight);
   margin: auto;
   padding: 20px;
-  margin-top: 40vh;
+  margin-top: 25vh;
   border: 5px solid black;
   width: 500px;
   display: -webkit-box;
@@ -648,7 +904,6 @@ header h1 {
 
 .modal .modal-content .btnsContainer button {
   font-size: 1.4em;
-  height: 100%;
   width: 150px;
   text-align: center;
   margin: 0;

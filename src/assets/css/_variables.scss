@@ -6,7 +6,12 @@
     --var-secondary: #d099d0;
     --var-highlight: #feee00;
     --var-success: #1d8719;
+    --var-success-dark: #0c5309;
+    --var-success-light: #48d643;
+
     --var-danger: #c90000;
+    --var-danger-dark: #610101;
+    --var-danger-light: #f33b3b;
 }
 
 @mixin btnsContainer {
@@ -19,7 +24,7 @@
 
 @mixin btn {
     font-size: 1.4em;
-    height: 100%;
+    // height: 100%;
     width: 150px;
     text-align: center;
     margin: 0;
@@ -43,4 +48,16 @@
         border: var(--var-primary) 1px solid;
         box-shadow: -3px 5px var(--var-primary);
     }
+}
+
+@mixin errorContainer {
+    color: var(--var-danger-dark);
+    background-color: var(--var-danger-light);
+    border: solid 1px var(--var-danger);
+}
+
+@mixin successContainer {
+    color: var(--var-success-dark);
+    background-color: var(--var-success-light);
+    border: solid 1px var(--var-success);
 }

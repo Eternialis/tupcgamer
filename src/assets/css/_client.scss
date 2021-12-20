@@ -5,7 +5,7 @@
     position: sticky;
     display: flex;
     background-color: var(--var-secondary);
-    padding: 0.8em;
+    padding: 0.5em 0.8em;
 
 
     .logo {
@@ -26,38 +26,129 @@
         }
     }
 
-    ul {
-        width: 300px;
+    .links {
+        width: 500px;
         margin-left: auto;
         margin-right: auto;
         list-style-type: none;
         display: flex;
         justify-content: space-evenly;
         padding: 0;
+        cursor: pointer;
 
+        li {
+            margin-left: 0.5em;
+
+            a {
+                color: black;
+                text-decoration: none;
+            }
+
+            &:hover {
+                font-weight: 700;
+            }
+        }
     }
 
     #user {
-        margin: 0.5em 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
 
         #login {
+            display: none;
             padding: 0.5em;
             background-color: black;
+            text-decoration: none;
+            color: white;
 
-            a {
-                text-decoration: none;
-                color: white;
-            }
         }
 
         #signin {
+            display: none;
             padding: 0.5em;
             background-color: var(--var-highlight);
             font-weight: bold;
+            text-decoration: none;
+            color: black;
+            margin-left: 0.5em;
+        }
 
-            a {
-                text-decoration: none;
-                color: black;
+        #cart {
+            display: flex;
+            align-items: center;
+            position: relative;
+
+            p {
+                margin-left: 0.2em;
+            }
+
+            #list {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 50px;
+                left: -185px;
+                width: 200px;
+                font-size: 0.8em;
+                background-color: black;
+                padding: 0 0.3em 0.3em 0.3em;
+
+                ul {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+
+                    li {
+                        width: 100%;
+                        background-color: white;
+                        margin-top: 0.3em;
+                        cursor: pointer;
+                    }
+                }
+
+                div {
+                    @include btnsContainer;
+                    margin-top: 0.3em;
+                    width: 100%;
+                    justify-content: flex-end;
+                    height: auto;
+
+                    button {
+                        @include btn;
+                        font-size: 1.05em;
+                        width: auto;
+                        padding: 0.5em;
+                        font-weight: 700;
+                    }
+
+                    #finalizarCompra {
+                        @include successContainer;
+                    }
+
+                    #borrarCompra {
+                        @include errorContainer;
+                        margin-left: 0.3em;
+                    }
+                }
+
+            }
+
+        }
+
+        #profile {
+            display: flex;
+            align-items: center;
+
+            p {
+                margin: 0 0.5em;
+            }
+
+            .img {
+                height: 50px;
+                width: 50px;
+                background-color: gray;
+                border-radius: 50%;
             }
         }
     }
@@ -66,12 +157,16 @@
 main {
     display: flex;
     margin: 1em;
+    align-items: flex-start;
 
     .filters {
         background-color: white;
         margin-right: 1em;
         padding: 1em;
-        height: 50vh;
+
+        h3 {
+            cursor: pointer;
+        }
 
         ul {
             list-style-type: none;
@@ -80,6 +175,7 @@ main {
 
             li {
                 margin-bottom: 0.2em;
+                cursor: pointer;
             }
         }
     }
@@ -94,26 +190,32 @@ main {
 
         .productsContainer__card {
             width: 100%;
-            background-color: black;
+            height: 190px;
+            background-color: var(--var-highlight);
             display: flex;
-            margin-bottom: 1em;
-
+            margin-bottom: 1.5em;
+            box-shadow: -7px 7px black;
 
             .productsContainer__img {
                 width: 150px;
-                height: 150px;
-                background-color: gray;
+
+                object-fit: cover;
             }
 
             .productsContainer__text {
                 width: 100%;
                 display: flex;
+                justify-content: space-between;
                 flex-direction: column;
                 margin: 1em;
-                height: 3px;
-                color: white;
+                color: black;
+                font-family: 'Chakra Petch', sans-serif;
+                font-weight: 700;
 
-                h3 {
+
+                a {
+                    color: black;
+                    text-decoration: none;
                     margin: 0;
                 }
 
@@ -123,12 +225,19 @@ main {
 
                 h4 {
                     margin: 0.2em;
-                    color: var(--var-highlight);
+                    color: var(--var-success);
                 }
 
                 button {
                     align-self: flex-end;
+                    background-color: var(--var-success);
+                    color: black;
+                    @include btn;
+                    font-weight: 700;
 
+                    p {
+                        margin: 0;
+                    }
                 }
             }
         }

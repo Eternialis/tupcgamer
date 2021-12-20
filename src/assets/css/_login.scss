@@ -51,7 +51,19 @@
         margin-bottom: 1em
     }
 
-    .log {
+    #errorMsj {
+        display: none;
+        margin-top: 0;
+        text-align: justify;
+        padding: 0.2em;
+        @include errorContainer;
+
+        a {
+            color: black;
+        }
+    }
+
+    .logBtn {
         align-self: flex-end;
         padding: 0.5em;
         margin: 0;

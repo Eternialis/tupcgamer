@@ -186,12 +186,11 @@ header {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
 
-    /* Black w/ opacity */
     .modal-content {
         background-color: var(--var-highlight);
         margin: auto;
         padding: 20px;
-        margin-top: 40vh;
+        margin-top: 25vh;
         border: 5px solid black;
         width: 500px;
         display: flex;
