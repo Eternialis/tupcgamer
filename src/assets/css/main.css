@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;1,300;1,500;1,700&family=Indie+Flower&family=Roboto+Mono:ital,wght@0,100;0,400;1,100;1,400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;1,300;1,500;1,700&family=Indie+Flower&family=Roboto+Mono:ital,wght@0,100;0,400;1,100;1,400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;1,300;1,500;1,700&family=Indie+Flower&family=Roboto+Mono:ital,wght@0,100;0,400;1,100;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;1,300;1,500;1,700&family=Indie+Flower&family=Roboto+Mono:ital,wght@0,100;0,400;1,100;1,400&display=swap");
 :root {
   --var-primary: #d09900;
   --var-secondary: #d099d0;
@@ -468,7 +469,6 @@ form #submit .formInput:hover {
 
 .navBar #user #cart #list div button {
   font-size: 1.4em;
-  width: 150px;
   text-align: center;
   margin: 0;
   -ms-flex-negative: 0;
@@ -610,13 +610,49 @@ main .productsContainer .productsContainer__card .productsContainer__text h4 {
   color: var(--var-success);
 }
 
-main .productsContainer .productsContainer__card .productsContainer__text button {
+main .productsContainer .productsContainer__card .productsContainer__text .productsContainer__Btns {
   -ms-flex-item-align: end;
       align-self: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  height: 60px;
+}
+
+main .productsContainer .productsContainer__card .productsContainer__text .productsContainer__Btns #cantidad {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main .productsContainer .productsContainer__card .productsContainer__text .productsContainer__Btns #cantidad button {
+  font-size: 1.4em;
+  text-align: center;
+  margin: 0;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+  width: 1.5em;
+  height: 1.5em;
+  margin: 1em;
+}
+
+main .productsContainer .productsContainer__card .productsContainer__text .productsContainer__Btns #agregar {
   background-color: var(--var-success);
   color: black;
   font-size: 1.4em;
-  width: 150px;
   text-align: center;
   margin: 0;
   -ms-flex-negative: 0;
@@ -624,10 +660,27 @@ main .productsContainer .productsContainer__card .productsContainer__text button
   border: none;
   cursor: pointer;
   font-weight: 700;
+  margin-left: 0.3em;
+  width: 150px;
 }
 
-main .productsContainer .productsContainer__card .productsContainer__text button p {
-  margin: 0;
+:root {
+  --var-primary: #d09900;
+  --var-secondary: #d099d0;
+  --var-highlight: #feee00;
+  --var-success: #1d8719;
+  --var-success-dark: #0c5309;
+  --var-success-light: #48d643;
+  --var-danger: #c90000;
+  --var-danger-dark: #610101;
+  --var-danger-light: #f33b3b;
+}
+
+.loading {
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  font-weight: 700;
 }
 
 body {
@@ -767,7 +820,6 @@ header h1 {
   background-color: black;
   color: var(--var-highlight);
   font-size: 1.4em;
-  width: 150px;
   text-align: center;
   margin: 0;
   -ms-flex-negative: 0;
@@ -904,7 +956,6 @@ header h1 {
 
 .modal .modal-content .btnsContainer button {
   font-size: 1.4em;
-  width: 150px;
   text-align: center;
   margin: 0;
   -ms-flex-negative: 0;

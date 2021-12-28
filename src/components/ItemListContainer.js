@@ -1,6 +1,9 @@
-function ItemListContainer({ greeting }) {
+import ItemList from "./ItemList"
+
+function ItemListContainer() {
+
     return (
-        <h2>{greeting} </h2>
+        <ItemList />
     )
 }
 

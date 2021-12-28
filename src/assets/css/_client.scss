@@ -228,17 +228,36 @@ main {
                     color: var(--var-success);
                 }
 
-                button {
+                .productsContainer__Btns {
                     align-self: flex-end;
-                    background-color: var(--var-success);
-                    color: black;
-                    @include btn;
-                    font-weight: 700;
+                    @include btnsContainer;
 
-                    p {
-                        margin: 0;
+                    #cantidad {
+                        display: flex;
+                        align-items: center;
+
+
+                        button {
+                            @include btn;
+                            width: 1.5em;
+                            height: 1.5em;
+                            margin: 1em;
+                        }
                     }
+
+                    #agregar {
+
+                        background-color: var(--var-success);
+                        color: black;
+                        @include btn;
+                        font-weight: 700;
+                        margin-left: 0.3em;
+                        width: 150px;
+
+                    }
+
                 }
+
             }
         }
     }

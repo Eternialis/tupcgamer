@@ -1,6 +1,7 @@
 import NavBar from "./components/NavBar";
-import ItemListContainer from "./components/ItemListContainer"
+import Header from "./components/Header"
 import UserImg from "./assets/img/usuario/usernamemini.jpg"
+import Main from "./components/Main"
 
 function App() {
 
@@ -11,10 +12,8 @@ function App() {
     return (
         <>
             <NavBar username={username} img={img} />
-            <header>
-                <ItemListContainer greeting={greeting} />
-
-            </header>
+            <Header greeting={greeting} />
+            <Main />
         </>
     )
 }
