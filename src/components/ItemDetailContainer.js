@@ -1,4 +1,4 @@
-import ItemList from "./ItemList"
+import ItemDetail from "./ItemDetail"
 import { useEffect, useState } from "react"
 
 let productos = [
@@ -7,7 +7,7 @@ let productos = [
     { id: 3, name: "Fuente ASUS ROG STRIX 750G 80 Plus Gold 750W Full Modular", tag: "Fuente", fab: "Intel", price: 970.20, stock: 400, img: "/productos/Fuente_ASUS_ROG_STRIX_750G_80_Plus_Gold_750W_Full_Modular_38c61d29-med.jpg" }
 ];
 
-function ItemListContainer() {
+function ItemDetailContainer() {
 
     const [items, setItems] = useState([])
     const [loading, setLoading] = useState(true)
@@ -24,13 +24,17 @@ function ItemListContainer() {
         promesa.then((items) => {
             setLoading(false)
             setItems(items)
-        })
+        }).catch((err) => console.log(err))
 
-    }, [])
+    }, []);
+
+    console.log(items);
 
     return (
-        <ItemList items={items} loading={loading} />
+        <>
+            {loading ? <p className="loading">Cargando...</p> : items.map(item => <ItemDetail name={item.name} tag={item.tag} price={item.price} img={item.img} key={item.id} />)}
+        </>
     )
 }
 
-export default ItemListContainer
+export default ItemDetailContainer

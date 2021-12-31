@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;1,300;1,500;1,700&family=Indie+Flower&family=Roboto+Mono:ital,wght@0,100;0,400;1,100;1,400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;1,300;1,500;1,700&family=Indie+Flower&family=Roboto+Mono:ital,wght@0,100;0,400;1,100;1,400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;1,300;1,500;1,700&family=Indie+Flower&family=Roboto+Mono:ital,wght@0,100;0,400;1,100;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;1,300;1,500;1,700&family=Indie+Flower&family=Roboto+Mono:ital,wght@0,100;0,400;1,100;1,400&display=swap");
 :root {
   --var-primary: #d09900;
   --var-secondary: #d099d0;
@@ -681,6 +682,85 @@ main .productsContainer .productsContainer__card .productsContainer__text .produ
   text-align: center;
   font-size: 2em;
   font-weight: 700;
+}
+
+:root {
+  --var-primary: #d09900;
+  --var-secondary: #d099d0;
+  --var-highlight: #feee00;
+  --var-success: #1d8719;
+  --var-success-dark: #0c5309;
+  --var-success-light: #48d643;
+  --var-danger: #c90000;
+  --var-danger-dark: #610101;
+  --var-danger-light: #f33b3b;
+}
+
+.productDetailContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2em;
+}
+
+.productDetailContainer .productDetailContainer__text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  margin-left: 1em;
+}
+
+.productDetailContainer .productDetailContainer__btns {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  height: 60px;
+}
+
+.productDetailContainer .productDetailContainer__btns #cantidad {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.productDetailContainer .productDetailContainer__btns #cantidad button {
+  font-size: 1.4em;
+  text-align: center;
+  margin: 0;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+  width: 1.5em;
+  height: 1.5em;
+  margin: 1em;
 }
 
 body {
