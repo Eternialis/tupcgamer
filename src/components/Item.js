@@ -1,24 +1,16 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
+import ItemListContainer from "./ItemListContainer"
 
-function Item({ name, tag, price, img }) {
-
-    let [cantidad, setCantidad] = useState(1)
+function Item({ id, name, tag, price, img }) {
 
     return (
         <div className="productsContainer__card">
             <img src={img} alt="" className="productsContainer__img" />
             <div className="productsContainer__text">
-                <a href="/#" className="productsContainer__Title">{name}</a>
+                <Link to={`/item/${id}`} element={<ItemListContainer />} className="productsContainer__Title">{name}</Link>
                 <p>{tag}</p>
                 <h4>$ {price}</h4>
-                <div className="productsContainer__Btns">
-                    <div id="cantidad">
-                        <button onClick={() => { setCantidad(cantidad > 1 ? cantidad - 1 : cantidad) }}>-</button>
-                        <p>{cantidad}</p>
-                        <button onClick={() => { setCantidad(cantidad + 1) }}>+</button>
-                    </div>
-                    <button id="agregar">Agregar al carrito</button>
-                </div>
             </div>
         </div>
     )

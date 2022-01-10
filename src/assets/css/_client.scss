@@ -173,7 +173,9 @@ main {
             margin: 0;
             padding: 0;
 
-            li {
+            a {
+                text-decoration: none;
+                color: black;
                 margin-bottom: 0.2em;
                 cursor: pointer;
             }
@@ -226,36 +228,6 @@ main {
                 h4 {
                     margin: 0.2em;
                     color: var(--var-success);
-                }
-
-                .productsContainer__Btns {
-                    align-self: flex-end;
-                    @include btnsContainer;
-
-                    #cantidad {
-                        display: flex;
-                        align-items: center;
-
-
-                        button {
-                            @include btn;
-                            width: 1.5em;
-                            height: 1.5em;
-                            margin: 1em;
-                        }
-                    }
-
-                    #agregar {
-
-                        background-color: var(--var-success);
-                        color: black;
-                        @include btn;
-                        font-weight: 700;
-                        margin-left: 0.3em;
-                        width: 150px;
-
-                    }
-
                 }
 
             }

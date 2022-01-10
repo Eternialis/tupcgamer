@@ -1,22 +1,23 @@
 import logo from '../assets/img/logotipo.svg'
 import Carrito from './CartWidget'
+import { Link } from 'react-router-dom'
 
 function NavBar({ username, img }) {
     return (
         <nav className="navBar">
-            <a href="/#" className="logo">
+            <Link to="/" className="logo">
                 <h1>tu pc gamer</h1>
                 <img src={logo} alt="" />
-            </a>
+            </Link>
             <ul className="links">
                 <li>productos</li>
                 <li>contacto</li>
-                <li id="vistaEdicion"><a href="./vistaEdicion.html">vista Edición</a></li>
+                <li id="vistaEdicion"><Link to="/vistaEdicion">vista Edición</Link></li>
                 <li id="logout">Cerrar sesión</li>
             </ul>
             <div id="user">
-                <a href="./login.html" id="login">Iniciar Sesión</a>
-                <a href="./signin.html" id="signin">Registrarse</a>
+                <Link to="/login" id="login">Iniciar Sesión</Link>
+                <Link to="/signin" id="signin">Registrarse</Link>
                 <Carrito />
                 <div id="profile">
                     <p>{username}</p>

@@ -1,5 +1,6 @@
 import ItemDetail from "./ItemDetail"
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom";
 
 let productos = [
     { id: 1, name: "Procesador Intel Core i7 9700F 4.7GHz Turbo 1151 Coffee Lake", tag: "Microprocesador", fab: "Intel", price: 400.50, stock: 500, img: "/productos/Procesador_Intel_Core_i7_9700F_4.7GHz_Turbo_1151_Coffee_Lake_40da7c9b-med.jpg" },
@@ -9,8 +10,10 @@ let productos = [
 
 function ItemDetailContainer() {
 
-    const [items, setItems] = useState([])
+    const [item, setItem] = useState({})
     const [loading, setLoading] = useState(true)
+
+    let { id } = useParams()
 
     useEffect(() => {
 
@@ -21,18 +24,20 @@ function ItemDetailContainer() {
             }, 2000)
         })
 
+        console.log(typeof id)
+
         promesa.then((items) => {
             setLoading(false)
-            setItems(items)
+            setItem(items.find(item => item.id == id))
         }).catch((err) => console.log(err))
 
-    }, []);
+        console.log(item)
 
-    console.log(items);
+    }, [id]);
 
     return (
         <>
-            {loading ? <p className="loading">Cargando...</p> : items.map(item => <ItemDetail name={item.name} tag={item.tag} price={item.price} img={item.img} key={item.id} />)}
+            {loading ? <p className="loading">Cargando...</p> : <ItemDetail item={item} />}
         </>
     )
 }
