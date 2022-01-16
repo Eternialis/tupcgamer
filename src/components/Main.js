@@ -1,15 +1,17 @@
 import ItemListContainer from "./ItemListContainer"
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useState } from "react"
 
 
 function Main() {
 
     const [filter, setFilter] = useState("Mostrar Todo")
+    const [loading, setLoading] = useState(true)
 
     const filterItems = (e) => {
         console.dir(e.target.textContent)
         setFilter(e.target.textContent)
+        setLoading(true)
     }
 
 
@@ -24,7 +26,7 @@ function Main() {
                     <li><Link to={"/cat/gabinete"} onClick={filterItems} element={<Main />}>Gabinete</Link></li>
                 </ul>
             </div>
-            <ItemListContainer filter={filter} />
+            <ItemListContainer filter={filter} loading={loading} setLoading={setLoading} />
 
 
         </main>

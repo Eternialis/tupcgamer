@@ -196,14 +196,13 @@ header {
         width: 500px;
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
+        align-items: center;
 
-        i {
+        svg {
+            color: var(--var-success);
+            width: 200px;
+            height: 200px;
 
-            color: black;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
         }
 
         p {
@@ -215,19 +214,25 @@ header {
         .btnsContainer {
             @include btnsContainer;
             margin-top: 0.8em;
+            justify-content: space-between;
+            width: 100%;
+            display: flex;
+            align-items: center;
 
-            button {
+            a {
                 @include btn;
                 font-weight: 700;
-                margin-left: 1em;
+                text-decoration: none;
+                color: black;
+                padding: 0.3em;
             }
 
-            .aceptarBtn {
-                background-color: var(--var-success);
+            .seguirBtn {
+                background-color: var(--var-secondary);
             }
 
-            .cancelarBtn {
-                background-color: var(--var-danger);
+            .terminarBtn {
+                background-color: var(--var-primary);
             }
 
         }

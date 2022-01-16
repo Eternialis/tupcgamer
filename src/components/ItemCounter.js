@@ -1,17 +1,23 @@
 import { useState } from "react"
 
-function ItemCounter() {
+function ItemCounter({ onAdd }) {
 
     let [cantidad, setCantidad] = useState(1)
 
+    const contadorMenos = () => {
+        setCantidad(cantidad > 1 ? cantidad = cantidad - 1 : cantidad)
+        onAdd(cantidad)
+    }
+    const contadorMas = () => {
+        setCantidad(cantidad = cantidad + 1)
+        onAdd(cantidad)
+    }
+
     return (
-        <div className="productsContainer__Btns">
-            <button id="agregar">Agregar al carrito</button>
-            <div id="cantidad">
-                <button onClick={() => { setCantidad(cantidad > 1 ? cantidad - 1 : cantidad) }}>-</button>
-                <p>{cantidad}</p>
-                <button onClick={() => { setCantidad(cantidad + 1) }}>+</button>
-            </div>
+        <div id="cantidad">
+            <button onClick={contadorMenos}>-</button>
+            <p>{cantidad}</p>
+            <button onClick={contadorMas}>+</button>
         </div>
     )
 }

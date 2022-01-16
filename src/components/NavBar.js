@@ -2,7 +2,11 @@ import logo from '../assets/img/logotipo.svg'
 import Carrito from './CartWidget'
 import { Link } from 'react-router-dom'
 
+
 function NavBar({ username, img }) {
+
+
+
     return (
         <nav className="navBar">
             <Link to="/" className="logo">

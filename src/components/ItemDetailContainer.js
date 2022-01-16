@@ -8,7 +8,7 @@ let productos = [
     { id: 3, name: "Fuente ASUS ROG STRIX 750G 80 Plus Gold 750W Full Modular", tag: "Fuente", fab: "Intel", price: 970.20, stock: 400, img: "/productos/Fuente_ASUS_ROG_STRIX_750G_80_Plus_Gold_750W_Full_Modular_38c61d29-med.jpg" }
 ];
 
-function ItemDetailContainer() {
+function ItemDetailContainer({ setModal }) {
 
     const [item, setItem] = useState({})
     const [loading, setLoading] = useState(true)
@@ -24,20 +24,17 @@ function ItemDetailContainer() {
             }, 2000)
         })
 
-        console.log(typeof id)
-
         promesa.then((items) => {
             setLoading(false)
             setItem(items.find(item => item.id == id))
         }).catch((err) => console.log(err))
 
-        console.log(item)
 
     }, [id]);
 
     return (
         <>
-            {loading ? <p className="loading">Cargando...</p> : <ItemDetail item={item} />}
+            {loading ? <p className="loading">Cargando...</p> : <ItemDetail item={item} setModal={setModal} />}
         </>
     )
 }
