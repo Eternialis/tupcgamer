@@ -3,14 +3,14 @@ import { context } from './CartContext'
 
 const Cart = () => {
 
-    const { cartItems, totalPrice, cantidad } = useContext(context)
+    const { cartItems, totalPrice, cantidadTotal } = useContext(context)
 
     console.log(cartItems)
 
     return (
         <div>
             Hola soy el Cart
-            <p>Cantidad de items totales: {cantidad} </p>
+            <p>Cantidad de items totales: {cantidadTotal} </p>
             {cartItems.map((item) => {
                 return (
                     <div key={item.id}>

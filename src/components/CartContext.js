@@ -3,18 +3,22 @@ import { createContext, useReducer } from "react";
 const initialState = {
     cartItems: [],
     totalPrice: 0,
-    cantidad: 0
+    cantidadTotal: 0
 }
 
 const reducer = (state, action) => {
+    debugger
     const { item, cantidad, status } = action
+
+    const index = state.cartItems.findIndex((oldItem) => oldItem.id === item.id)
+    console.log(index)
 
     switch (status) {
         case "agregar":
             return {
-                cartItems: [...state.cartItems, item],
-                totalPrice: (state.totalPrice + item.price * cantidad).toFixed(2),
-                cantidad: state.cantidad + cantidad
+                cartItems: index === -1 ? [...state.cartItems, item] : state.cartItems,
+                totalPrice: Number((state.totalPrice + item.price * cantidad).toFixed(2)),
+                cantidadTotal: state.cantidadTotal + cantidad
             }
         case "quitar":
     }

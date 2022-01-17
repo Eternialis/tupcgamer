@@ -6,12 +6,12 @@ import { context } from './CartContext'
 
 function CartWidget() {
 
-    const { cantidad } = useContext(context)
+    const { cantidadTotal } = useContext(context)
 
     return (
         <Link to={"/cart"} id="cart">
             <FontAwesomeIcon icon={faCartShopping} />
-            <p id="cantidadProductos">{cantidad}</p>
+            <p id="cantidadProductos">{cantidadTotal}</p>
             <div id="list">
                 <ul>
 

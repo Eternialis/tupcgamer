@@ -55,6 +55,11 @@
         display: flex;
         align-items: center;
 
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
         #login {
             display: none;
             padding: 0.5em;
@@ -154,31 +159,40 @@
     }
 }
 
+.clientHeader {
+    margin: 1.5em;
+
+    h2 {
+        font-size: 2em;
+        margin: 0;
+    }
+}
+
 main {
     display: flex;
     margin: 1em;
     align-items: flex-start;
 
     .filters {
-        background-color: white;
+        background-color: rgb(255, 255, 255, 0.5);
         margin-right: 1em;
         padding: 1em;
 
         h3 {
-            cursor: pointer;
+            margin-top: 0;
         }
 
         ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
+        }
 
-            a {
-                text-decoration: none;
-                color: black;
-                margin-bottom: 0.2em;
-                cursor: pointer;
-            }
+        a {
+            text-decoration: none;
+            color: black;
+            margin-bottom: 0.2em;
+            cursor: pointer;
         }
     }
 

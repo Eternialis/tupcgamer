@@ -1,5 +1,4 @@
 import ItemCounter from "./ItemCounter"
-import { Link } from 'react-router-dom'
 import { context } from "./CartContext"
 import { useState, useContext } from "react"
 
