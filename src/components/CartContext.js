@@ -7,16 +7,16 @@ const initialState = {
 }
 
 const reducer = (state, action) => {
-    debugger
     const { item, cantidad, status } = action
 
     const index = state.cartItems.findIndex((oldItem) => oldItem.id === item.id)
-    console.log(index)
-
+    const newItem = (({ id, name, price, img }) => ({ id, name, price, img, cantidad }))(item)
+    console.log(newItem.cantidad)
     switch (status) {
         case "agregar":
             return {
-                cartItems: index === -1 ? [...state.cartItems, item] : state.cartItems,
+                cartItems: index === -1 ? [...state.cartItems, newItem] : state.cartItems,
+                //cartItems: index === -1 ? [...state.cartItems, newItem] : [...state.cartItems, {...state.cartItems[index], cartItems[index].cantidad}],
                 totalPrice: Number((state.totalPrice + item.price * cantidad).toFixed(2)),
                 cantidadTotal: state.cantidadTotal + cantidad
             }
