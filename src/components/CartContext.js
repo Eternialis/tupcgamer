@@ -14,8 +14,10 @@ const reducer = (state, action) => {
             const index = state.cartItems.findIndex((oldItem) => oldItem.id === item.id)
             const newItem = (({ id, name, price, img }) => ({ id, name, price, img, cantidad }))(item)
 
+            console.log(newItem)
+
             return {
-                cartItems: index === -1 ? [...state.cartItems, newItem] : [...state.cartItems, state.cartItems[index] = { ...state.cartItems[index], cantidad: state.cartItems[index].cantidad + cantidad }],
+                cartItems: index === -1 ? [...state.cartItems, newItem] : [...state.cartItems.filter(item => item.id !== newItem.id), state.cartItems[index] = { ...state.cartItems[index], cantidad: state.cartItems[index].cantidad + cantidad }],
                 //cartItems: index === -1 ? [...state.cartItems, newItem] : state.cartItems.map((cartItem) => cartItem.id === newItem.id ? {...cartItem, cartItem.cantidad: cartItem.cantidad + newItem.cantidad} : cartItem),
                 totalPrice: Number((state.totalPrice + item.price * cantidad).toFixed(2)),
                 cantidadTotal: state.cantidadTotal + cantidad

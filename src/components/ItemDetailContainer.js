@@ -1,6 +1,8 @@
 import ItemDetail from "./ItemDetail"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
+import { getDoc, doc } from "firebase/firestore";
+import { itemCollection } from "./firebase";
 
 let productos = [
     { id: 1, name: "Procesador Intel Core i7 9700F 4.7GHz Turbo 1151 Coffee Lake", tag: "Microprocesador", fab: "Intel", price: 400.50, stock: 500, img: "/productos/Procesador_Intel_Core_i7_9700F_4.7GHz_Turbo_1151_Coffee_Lake_40da7c9b-med.jpg" },
@@ -21,17 +23,15 @@ function ItemDetailContainer({ setModal }) {
 
     useEffect(() => {
 
-        const promesa = new Promise((res, rej) => {
-            setTimeout(() => {
+        const pedido = getDoc(doc(itemCollection, id))
 
-                res(productos)
-            }, 2000)
-        })
 
-        promesa.then((items) => {
-            setLoading(false)
-            setItem(items.find(item => item.id == id))
-        }).catch((err) => console.log(err))
+        pedido
+            .then((doc) => {
+                setLoading(false)
+                setItem({ id: id, ...doc.data() })
+            })
+            .catch((err) => console.log(err))
 
 
     }, [id]);
