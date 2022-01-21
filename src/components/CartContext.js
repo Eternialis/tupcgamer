@@ -9,18 +9,23 @@ const initialState = {
 const reducer = (state, action) => {
     const { item, cantidad, status } = action
 
-    const index = state.cartItems.findIndex((oldItem) => oldItem.id === item.id)
-    const newItem = (({ id, name, price, img }) => ({ id, name, price, img, cantidad }))(item)
-    console.log(newItem.cantidad)
     switch (status) {
         case "agregar":
+            const index = state.cartItems.findIndex((oldItem) => oldItem.id === item.id)
+            const newItem = (({ id, name, price, img }) => ({ id, name, price, img, cantidad }))(item)
+
             return {
-                cartItems: index === -1 ? [...state.cartItems, newItem] : state.cartItems,
-                //cartItems: index === -1 ? [...state.cartItems, newItem] : [...state.cartItems, {...state.cartItems[index], cartItems[index].cantidad}],
+                cartItems: index === -1 ? [...state.cartItems, newItem] : [...state.cartItems, state.cartItems[index] = { ...state.cartItems[index], cantidad: state.cartItems[index].cantidad + cantidad }],
+                //cartItems: index === -1 ? [...state.cartItems, newItem] : state.cartItems.map((cartItem) => cartItem.id === newItem.id ? {...cartItem, cartItem.cantidad: cartItem.cantidad + newItem.cantidad} : cartItem),
                 totalPrice: Number((state.totalPrice + item.price * cantidad).toFixed(2)),
                 cantidadTotal: state.cantidadTotal + cantidad
             }
         case "quitar":
+            return {
+                cartItems: state.cartItems.filter((i) => i.id !== item.id),
+                totalPrice: Number((state.totalPrice - item.price * cantidad).toFixed(2)),
+                cantidadTotal: state.cantidadTotal - cantidad
+            }
     }
 }
 

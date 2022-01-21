@@ -10,14 +10,17 @@ const Cart = () => {
 
     const { cartReducer } = useContext(context)
 
-    const handleClick = () => {
-        // cartReducer({
-        //     item,
-        //     cantidad: cantidad,
-        //     status: "agregar"
-        // })
+    const handleRemove = (item) => {
+
+        cartReducer({
+            item,
+            cantidad: item.cantidad,
+            status: "quitar"
+        })
         // setModal(true)
     }
+    console.log(cartReducer)
+    console.log(cartItems)
 
     return (
         <main className='cartContainer'>
@@ -33,7 +36,7 @@ const Cart = () => {
                                     <h4 className='itemCard__title'>{item.name}</h4>
                                     <p>Precio: $ {item.price}</p>
                                     <p>Cantidad: {item.cantidad}</p>
-                                    <button><FontAwesomeIcon icon={faTrashAlt} onClick={handleClick} /></button>
+                                    <button><FontAwesomeIcon icon={faTrashAlt} onClick={() => handleRemove(item)} /></button>
                                 </div>
                             </div>
                         )
