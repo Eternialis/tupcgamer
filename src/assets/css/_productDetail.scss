@@ -1,0 +1,63 @@
+@import './variables';
+
+.productDetailContainer {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 2em;
+    margin-bottom: 2em;
+
+
+    .productDetailContainer__img {
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .productDetailContainer__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 700px;
+        margin-left: 1em;
+
+        h1 {
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        h3 {
+            font-size: 2em
+        }
+    }
+
+    .productsContainer__Btns {
+        @include btnsContainer;
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+        align-self: center;
+
+        #cantidad {
+            display: flex;
+            align-items: center;
+
+
+            button {
+                @include btn;
+                width: 1.5em;
+                height: 1.5em;
+                margin: 1em;
+            }
+        }
+
+        #agregar {
+
+            background-color: var(--var-success);
+            color: black;
+            @include btn;
+            font-weight: 700;
+            margin-left: 0.3em;
+            width: 150px;
+
+        }
+    }
+}
