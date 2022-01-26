@@ -2,7 +2,7 @@ import ItemCounter from "./ItemCounter"
 import { context } from "./CartContext"
 import { useState, useContext } from "react"
 
-function ItemDetail({ item, setModal }) {
+function ItemDetail({ item, setItemAddModal }) {
 
     const { name, price, tag, img } = item
 
@@ -16,7 +16,7 @@ function ItemDetail({ item, setModal }) {
             cantidad: cantidad,
             status: "agregar"
         })
-        setModal(true)
+        setItemAddModal(true)
     }
 
     return (

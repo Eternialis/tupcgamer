@@ -12,11 +12,12 @@ function ItemListContainer({ filter, loading, setLoading }) {
         // Funcion usada para agregar todos los productos del array de productos a la base de datos
         //productos.forEach(item => addDoc(itemCollection, item))
         // Probar el orderBy para ordenar los productos por precio de menor a mayor y viceversa
+        const collectionAndFilters = [itemCollection]
 
-        const filtroTag = filter !== "Mostrar Todo" ? where("tag", "==", filter) : undefined
+        filter !== "Mostrar Todo" && collectionAndFilters.push(where("tag", "==", filter))
         const filtroPrice = filter !== "Mostrar Todo" ? where("price", "", filter) : undefined
         // Hacer filtro de name con el filter
-        const consulta = filtroTag ? query(itemCollection, filtroTag) : itemCollection
+        const consulta = query(...collectionAndFilters)
 
         const pedido = getDocs(consulta)
             .then(({ docs }) => {

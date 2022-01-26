@@ -2,9 +2,9 @@
 @import './login';
 @import './form';
 @import './client';
-@import './loading';
 @import './productDetail';
 @import './cartContainer';
+@import './loader';
 
 
 body {
@@ -215,12 +215,12 @@ header {
         .btnsContainer {
             @include btnsContainer;
             margin-top: 0.8em;
-            justify-content: space-between;
+            justify-content: space-around;
             width: 100%;
             display: flex;
             align-items: center;
 
-            a {
+            .btn {
                 @include btn;
                 font-weight: 700;
                 text-decoration: none;

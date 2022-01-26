@@ -3,31 +3,63 @@ import { context } from './CartContext'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { database } from './firebase'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 
-const Cart = () => {
+const Cart = ({ setItemDeleteModal, setItemToDelete, setOrder, setOrderId }) => {
 
-    const { cartItems, totalPrice, cantidadTotal } = useContext(context)
-
-    const { cartReducer } = useContext(context)
+    const { cartItems, totalPrice, cantidadTotal, cartReducer } = useContext(context)
 
     const handleRemove = (item) => {
-
-        cartReducer({
-            item,
-            cantidad: item.cantidad,
-            status: "quitar"
-        })
-        // setModal(true)
+        setItemToDelete(item)
+        setItemDeleteModal(true)
     }
-    console.log(cartReducer)
-    console.log(cartItems)
 
+    const handleRemoveAll = () => {
+        setItemToDelete("all")
+        setItemDeleteModal(true)
+    }
+
+    const confirmarCompra = () => {
+        const coleccionPedidos = collection(database, "pedidos")
+        const usuario = {
+            username: "Eternialis",
+            nombre: "Luca Hardmeier",
+            email: "hardmeierluca@gmail.com",
+            direccion: "Callefalsa 123",
+            telefono: "1149378791"
+        }
+        const compra = {
+            usuario,
+            cartItems,
+            totalPrice,
+            cantidadTotal,
+            created_at: serverTimestamp()
+        }
+        setOrder(compra)
+        const pedido = addDoc(coleccionPedidos, compra)
+        pedido
+            .then((resultado) => {
+                cartReducer({
+                    status: "quitarTodo"
+                })
+                console.log(resultado.id)
+                setOrderId(resultado.id)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
     return (
         <main className='cartContainer'>
             <h2>Tu carrito:</h2>
-            <p>Cantidad de productos comprados: {cantidadTotal} </p>
+            {cartItems.length > 0 ?
+                <div>
+                    <button onClick={() => handleRemoveAll()} >Vaciar carrito</button>
+                    <p>Cantidad de productos comprados: {cantidadTotal} </p>
+                </div> : null}
             <div>
-                {!cartItems.length ? <h3>¡Ups, tu carrito está vacío! Comienza a comprar <Link to="/">acá</Link>.</h3> :
+                {!cartItems.length ? <h3>¡Ups, tu carrito está vacío! Comenzá a comprar <Link to="/">acá</Link>.</h3> :
                     cartItems.map((item) => {
                         return (
                             <div key={item.id} className='itemCard'>
@@ -42,7 +74,11 @@ const Cart = () => {
                         )
                     })}
             </div>
-            <p>Precio total: $ {totalPrice} </p>
+            {cartItems.length > 0 ?
+                <div>
+                    <p>Precio total: $ {totalPrice} </p>
+                    <Link to={`/order`} onClick={confirmarCompra}>Confirmar compra</Link>
+                </div> : null}
         </main>
     )
 }

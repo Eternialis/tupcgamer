@@ -5,10 +5,11 @@ import Cart from "./components/Cart";
 import Main from "./components/Main"
 import ItemDetailContainer from "./components/ItemDetailContainer"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Modal from "./components/Modal";
 import { useState } from "react";
 import CartContext from "./components/CartContext";
-
+import ItemAddModal from "./components/ItemAddModal";
+import ItemDeleteModal from "./components/ItemDeleteModal";
+import Order from "./components/Order";
 
 function App() {
 
@@ -16,7 +17,12 @@ function App() {
     const img = UserImg
     const greeting = `Bienvenido ${username}`
 
-    const [modal, setModal] = useState(false)
+    const [itemAddModal, setItemAddModal] = useState(false)
+    const [itemDeleteModal, setItemDeleteModal] = useState(false)
+    const [itemToDelete, setItemToDelete] = useState({})
+
+    const [order, setOrder] = useState({});
+    const [orderId, setOrderId] = useState("");
 
     return (
         <CartContext>
@@ -26,10 +32,12 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path="/cat/:tag" element={<Main />} />
-                    <Route path="/item/:id" element={<ItemDetailContainer setModal={setModal} />} />
-                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/item/:id" element={<ItemDetailContainer setItemAddModal={setItemAddModal} />} />
+                    <Route path="/cart" element={<Cart setItemDeleteModal={setItemDeleteModal} setItemToDelete={setItemToDelete} setOrder={setOrder} setOrderId={setOrderId} />} />
+                    <Route path="/order" element={<Order order={order} orderId={orderId} />} />
                 </Routes>
-                {modal && <Modal setModal={setModal} />}
+                {itemAddModal && <ItemAddModal setItemAddModal={setItemAddModal} />}
+                {itemDeleteModal && <ItemDeleteModal setItemDeleteModal={setItemDeleteModal} itemToDelete={itemToDelete} />}
             </BrowserRouter>
         </CartContext>
 

@@ -28,6 +28,8 @@ const reducer = (state, action) => {
                 totalPrice: Number((state.totalPrice - item.price * cantidad).toFixed(2)),
                 cantidadTotal: state.cantidadTotal - cantidad
             }
+        case "quitarTodo":
+            return initialState
     }
 }
 
