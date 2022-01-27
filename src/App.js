@@ -34,7 +34,7 @@ function App() {
                     <Route path="/cat/:tag" element={<Main />} />
                     <Route path="/item/:id" element={<ItemDetailContainer setItemAddModal={setItemAddModal} />} />
                     <Route path="/cart" element={<Cart setItemDeleteModal={setItemDeleteModal} setItemToDelete={setItemToDelete} setOrder={setOrder} setOrderId={setOrderId} />} />
-                    <Route path="/order" element={<Order order={order} orderId={orderId} />} />
+                    <Route path="/order/" element={<Order order={order} orderId={orderId} />} />
                 </Routes>
                 {itemAddModal && <ItemAddModal setItemAddModal={setItemAddModal} />}
                 {itemDeleteModal && <ItemDeleteModal setItemDeleteModal={setItemDeleteModal} itemToDelete={itemToDelete} />}

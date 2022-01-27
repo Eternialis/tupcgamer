@@ -14,9 +14,11 @@ function ItemListContainer({ filter, loading, setLoading }) {
         // Probar el orderBy para ordenar los productos por precio de menor a mayor y viceversa
         const collectionAndFilters = [itemCollection]
 
-        filter !== "Mostrar Todo" && collectionAndFilters.push(where("tag", "==", filter))
-        const filtroPrice = filter !== "Mostrar Todo" ? where("price", "", filter) : undefined
+        filter.tag !== "Mostrar Todo" && collectionAndFilters.push(where("tag", "==", filter.tag))
+        filter.desde !== 0 && collectionAndFilters.push(where("price", ">=", filter.desde))
+        filter.hasta !== 0 && collectionAndFilters.push(where("price", "<=", filter.hasta))
         // Hacer filtro de name con el filter
+        console.log(collectionAndFilters)
         const consulta = query(...collectionAndFilters)
 
         const pedido = getDocs(consulta)
@@ -34,7 +36,7 @@ function ItemListContainer({ filter, loading, setLoading }) {
 
     return (
 
-        <ItemList items={items} loading={loading} filter={filter} />
+        <ItemList items={items} loading={loading} />
     )
 }
 

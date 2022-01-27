@@ -24,7 +24,7 @@ function ItemDetailContainer({ setItemAddModal }) {
 
     return (
         <>
-            {loading ? <div className="loaderContainer"><span class="loader"></span></div> : <ItemDetail item={item} setItemAddModal={setItemAddModal} />}
+            {loading ? <div className="loaderContainer"><span className="loader"></span></div> : <ItemDetail item={item} setItemAddModal={setItemAddModal} />}
         </>
     )
 }
