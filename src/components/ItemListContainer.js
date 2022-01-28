@@ -14,18 +14,18 @@ function ItemListContainer({ filter, loading, setLoading }) {
         // Probar el orderBy para ordenar los productos por precio de menor a mayor y viceversa
         const collectionAndFilters = [itemCollection]
 
-        filter.tag !== "Mostrar Todo" && collectionAndFilters.push(where("tag", "==", filter.tag))
-        filter.desde !== 0 && collectionAndFilters.push(where("price", ">=", filter.desde))
-        filter.hasta !== 0 && collectionAndFilters.push(where("price", "<=", filter.hasta))
+        filter.tag && collectionAndFilters.push(where("tag", "==", filter.tag))
+        filter.desde && collectionAndFilters.push(where("price", ">=", filter.desde))
+        filter.hasta && collectionAndFilters.push(where("price", "<=", filter.hasta))
         // Hacer filtro de name con el filter
-        console.log(collectionAndFilters)
         const consulta = query(...collectionAndFilters)
 
-        const pedido = getDocs(consulta)
+        getDocs(consulta)
             .then(({ docs }) => {
                 const docsFormateado = docs.map(doc => ({ id: doc.id, ...doc.data() }))
                 setLoading(false)
                 setItems(docsFormateado)
+                console.log(docsFormateado)
             })
             .catch((error) => {
                 console.log(error)

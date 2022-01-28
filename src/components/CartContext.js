@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 const initialState = {
     cartItems: [],
@@ -7,28 +7,33 @@ const initialState = {
 }
 
 const reducer = (state, action) => {
+    debugger
     const { item, cantidad, status } = action
+    let newCart = {}
 
     switch (status) {
         case "agregar":
             const index = state.cartItems.findIndex((oldItem) => oldItem.id === item.id)
             const newItem = (({ id, name, price, img }) => ({ id, name, price, img, cantidad }))(item)
-
-            console.log(newItem)
-
-            return {
+            newCart = {
                 cartItems: index === -1 ? [...state.cartItems, newItem] : [...state.cartItems.filter(item => item.id !== newItem.id), state.cartItems[index] = { ...state.cartItems[index], cantidad: state.cartItems[index].cantidad + cantidad }],
-                //cartItems: index === -1 ? [...state.cartItems, newItem] : state.cartItems.map((cartItem) => cartItem.id === newItem.id ? {...cartItem, cartItem.cantidad: cartItem.cantidad + newItem.cantidad} : cartItem),
                 totalPrice: Number((state.totalPrice + item.price * cantidad).toFixed(2)),
                 cantidadTotal: state.cantidadTotal + cantidad
             }
+            sessionStorage.setItem("carrito", JSON.stringify(newCart))
+            return newCart
         case "quitar":
-            return {
+            newCart = {
                 cartItems: state.cartItems.filter((i) => i.id !== item.id),
                 totalPrice: Number((state.totalPrice - item.price * cantidad).toFixed(2)),
                 cantidadTotal: state.cantidadTotal - cantidad
             }
+            sessionStorage.setItem("carrito", JSON.stringify(newCart))
+            return newCart
+        case "restaurarCarrito":
+            return item
         case "quitarTodo":
+            sessionStorage.removeItem("carrito")
             return initialState
     }
 }
@@ -41,12 +46,6 @@ const CartContext = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    // PARA PENSAR: al use reducer le tengo que mandar algo que le indique si tiene que agregar o quitar elementos del carrito
-    // de acuerdo al tipo del objeto, tiene que pushear o splicear un objeto (cartItem) o sumar o restar en cuanto a las cantidades y el precio
-    // Para eso agregué el status, que permitiría saber si el objeto enviado se está sumando o restando
-    // hay que averiguar si se puede mandar directamente el objeto a const reducer para que haga él el resto
-
-
     function cartReducer(obj) {
         dispatch(obj)
     }
@@ -55,6 +54,15 @@ const CartContext = ({ children }) => {
         ...state,
         cartReducer
     }
+
+    useEffect(() => {
+        debugger
+        const carritoEnSession = { item: JSON.parse(sessionStorage.getItem("carrito")), status: "restaurarCarrito" }
+        console.log(carritoEnSession)
+        carritoEnSession.item && cartReducer(carritoEnSession)
+
+    }, []);
+
 
     return (
         <Provider value={contextValue}>

@@ -13,7 +13,7 @@ import Order from "./components/Order";
 
 function App() {
 
-    const username = "Username"
+    const username = "Pepe"
     const img = UserImg
     const greeting = `Bienvenido ${username}`
 

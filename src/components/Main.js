@@ -6,34 +6,35 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons"
 
 function Main() {
 
-    const [filter, setFilter] = useState({ tag: "Mostrar Todo", desde: 0, hasta: 0 })
-    const [loading, setLoading] = useState(true)
+    // Variables de filtro de rango de precios //
+    const [desde, setDesde] = useState("");
+    const [hasta, setHasta] = useState("");
     let { tag: tagName } = useParams()
+    const [filter, setFilter] = useState({ tag: "", desde: "", hasta: "" })
+    // Estado de carga //
+    const [loading, setLoading] = useState(true)
 
-    // useEffect(() => {
-
-    //     console.log(tagName)
-
-    //     setFilter({
-    //         ...filter,
-    //         tag: tagName
-    //     })
-    //     setLoading(true)
-
-    // }, [tagName]);
-
-
-
-    const filterItems = (e) => {
+    useEffect(() => {
         setFilter({
             ...filter,
-            tag: e.target.textContent
+            tag: tagName
         })
         setLoading(true)
-    }
+    }, [tagName]);
 
-    const [desde, setDesde] = useState(0);
-    const [hasta, setHasta] = useState(0);
+    const filterItems = (e) => {
+        //Revisar
+        if (e.target.text === "Mostrar Todo") {
+            setDesde("")
+            setHasta("")
+            setFilter({
+                ...filter,
+                desde: "",
+                hasta: ""
+            })
+        }
+        setLoading(true)
+    }
 
     const handleSubmitPrecios = (e) => {
         e.preventDefault()
@@ -46,7 +47,6 @@ function Main() {
 
     const handleChangeDesde = (e) => {
         setDesde(Number(e.target.value))
-        console.log(desde)
     }
 
     const handleChangeHasta = (e) => {
@@ -69,12 +69,12 @@ function Main() {
                     <label target="desde">Desde:</label>
                     <div className="inputPrecio">
                         <p>$</p>
-                        <input type="number" name="desde" id="desde" onChange={handleChangeDesde} />
+                        <input type="number" name="desde" id="desde" value={desde} onChange={handleChangeDesde} />
                     </div>
                     <label target="hasta">Hasta:</label>
                     <div className="inputPrecio">
                         <p>$</p>
-                        <input type="number" name="hasta" id="hasta" onChange={handleChangeHasta} />
+                        <input type="number" name="hasta" id="hasta" value={hasta} onChange={handleChangeHasta} />
                     </div>
                     <button type="submit"><FontAwesomeIcon icon={faChevronRight} /> </button>
                 </form>

@@ -50,18 +50,12 @@
         }
     }
 
-    #user {
+    #nouser {
         margin: 0;
         display: flex;
         align-items: center;
 
-        a {
-            text-decoration: none;
-            color: black;
-        }
-
         #login {
-            display: none;
             padding: 0.5em;
             background-color: black;
             text-decoration: none;
@@ -70,13 +64,24 @@
         }
 
         #signin {
-            display: none;
             padding: 0.5em;
             background-color: var(--var-highlight);
             font-weight: bold;
             text-decoration: none;
             color: black;
             margin-left: 0.5em;
+        }
+
+    }
+
+    #user {
+        margin: 0;
+        display: flex;
+        align-items: center;
+
+        a {
+            text-decoration: none;
+            color: black;
         }
 
         #cart {
