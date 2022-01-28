@@ -10,12 +10,15 @@ import CartContext from "./components/CartContext";
 import ItemAddModal from "./components/ItemAddModal";
 import ItemDeleteModal from "./components/ItemDeleteModal";
 import Order from "./components/Order";
+import Login from "./components/Login";
+import Signin from "./components/Signin";
 
 function App() {
 
-    const username = "Pepe"
+    const [infoUsuario, setInfoUsuario] = useState({});
+    const { user, nombres } = infoUsuario
     const img = UserImg
-    const greeting = `Bienvenido ${username}`
+    const greeting = `Bienvenido ${nombres}`
 
     const [itemAddModal, setItemAddModal] = useState(false)
     const [itemDeleteModal, setItemDeleteModal] = useState(false)
@@ -27,16 +30,18 @@ function App() {
     return (
         <CartContext>
             <BrowserRouter>
-                <NavBar username={username} img={img} />
+                <NavBar user={user} img={img} />
                 <Header greeting={greeting} />
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path="/cat/:tag" element={<Main />} />
-                    <Route path="/item/:id" element={<ItemDetailContainer setItemAddModal={setItemAddModal} />} />
+                    <Route path="/item/:id" element={<ItemDetailContainer setItemAddModal={setItemAddModal} user={user} />} />
                     <Route path="/cart" element={<Cart setItemDeleteModal={setItemDeleteModal} setItemToDelete={setItemToDelete} setOrder={setOrder} setOrderId={setOrderId} />} />
                     <Route path="/order/" element={<Order order={order} orderId={orderId} />} />
+                    <Route path="/login" element={<Login setInfoUsuario={setInfoUsuario} />} />
+                    <Route path="/signin" element={<Signin />} />
                 </Routes>
-                {itemAddModal && <ItemAddModal setItemAddModal={setItemAddModal} />}
+                {itemAddModal && <ItemAddModal setItemAddModal={setItemAddModal} user={user} />}
                 {itemDeleteModal && <ItemDeleteModal setItemDeleteModal={setItemDeleteModal} itemToDelete={itemToDelete} />}
             </BrowserRouter>
         </CartContext>

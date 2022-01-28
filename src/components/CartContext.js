@@ -7,7 +7,6 @@ const initialState = {
 }
 
 const reducer = (state, action) => {
-    debugger
     const { item, cantidad, status } = action
     let newCart = {}
 
@@ -56,11 +55,8 @@ const CartContext = ({ children }) => {
     }
 
     useEffect(() => {
-        debugger
         const carritoEnSession = { item: JSON.parse(sessionStorage.getItem("carrito")), status: "restaurarCarrito" }
-        console.log(carritoEnSession)
         carritoEnSession.item && cartReducer(carritoEnSession)
-
     }, []);
 
 

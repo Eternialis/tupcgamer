@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { itemCollection } from "./firebase";
 
-function ItemDetailContainer({ setItemAddModal }) {
+function ItemDetailContainer({ setItemAddModal, user }) {
 
     const [item, setItem] = useState({})
     const [loading, setLoading] = useState(true)
@@ -24,7 +24,7 @@ function ItemDetailContainer({ setItemAddModal }) {
 
     return (
         <>
-            {loading ? <div className="loaderContainer"><span className="loader"></span></div> : <ItemDetail item={item} setItemAddModal={setItemAddModal} />}
+            {loading ? <div className="loaderContainer"><span className="loader"></span></div> : <ItemDetail item={item} setItemAddModal={setItemAddModal} user={user} />}
         </>
     )
 }

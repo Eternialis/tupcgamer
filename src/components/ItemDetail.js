@@ -2,7 +2,7 @@ import ItemCounter from "./ItemCounter"
 import { context } from "./CartContext"
 import { useState, useContext } from "react"
 
-function ItemDetail({ item, setItemAddModal }) {
+function ItemDetail({ item, setItemAddModal, user }) {
 
     const { name, price, tag, img } = item
 
@@ -11,11 +11,12 @@ function ItemDetail({ item, setItemAddModal }) {
     const { cartReducer } = useContext(context)
 
     const handleClick = () => {
-        cartReducer({
-            item,
-            cantidad: cantidad,
-            status: "agregar"
-        })
+        user &&
+            cartReducer({
+                item,
+                cantidad: cantidad,
+                status: "agregar"
+            })
         setItemAddModal(true)
     }
 
