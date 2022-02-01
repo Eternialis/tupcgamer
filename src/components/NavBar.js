@@ -3,9 +3,12 @@ import Carrito from './CartWidget'
 import { Link } from 'react-router-dom'
 
 
-function NavBar({ user, img }) {
+function NavBar({ user, img, setInfoUsuario }) {
 
-
+    const handleClick = () => {
+        setInfoUsuario({})
+        sessionStorage.clear("user")
+    }
 
     return (
         <nav className="navBar">
@@ -14,12 +17,10 @@ function NavBar({ user, img }) {
                 <img src={logo} alt="tu pc gamer" />
             </Link>
             <ul className="links">
-                <Link to="/" >
-                    <li>productos</li>
-                </Link>
+                <li><Link to="/" >productos</Link></li>
                 <li><Link to={"/mi-perfil"}>Mi perfil</Link></li>
                 <li id="vistaEdicion"><Link to="/vistaEdicion">vista Edición</Link></li>
-                <li id="logout">Cerrar sesión</li>
+                <li id="logout" onClick={handleClick}>Cerrar sesión</li>
             </ul>
             {!user ? <div id='nouser'>
                 <Link to="/login" id="login">Iniciar Sesión</Link>

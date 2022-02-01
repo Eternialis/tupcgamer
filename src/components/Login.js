@@ -18,6 +18,7 @@ const Login = ({ setInfoUsuario }) => {
             .then((usuario) => {
                 if (usuario.data().pass === pass) {
                     setInfoUsuario({ user: usuario.id, ...usuario.data() })
+                    sessionStorage.setItem("user", JSON.stringify({ user: usuario.id, ...usuario.data() }))
                     setError(false)
                     navigate("/")
                 } else {

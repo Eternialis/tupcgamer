@@ -26,7 +26,6 @@ function ItemListContainer({ filter, loading, setLoading }) {
                 const docsFormateado = docs.map(doc => ({ id: doc.id, ...doc.data() }))
                 setLoading(false)
                 setItems(docsFormateado)
-                console.log(docsFormateado)
             })
             .catch((error) => {
                 console.log(error)

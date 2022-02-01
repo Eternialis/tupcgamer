@@ -26,13 +26,17 @@ function App() {
     const [itemDeleteModal, setItemDeleteModal] = useState(false)
     const [itemToDelete, setItemToDelete] = useState({})
 
-    const [order, setOrder] = useState({});
-    const [orderId, setOrderId] = useState("");
+    const [order, setOrder] = useState({})
+    const [orderId, setOrderId] = useState("")
+
+    console.log(Object.entries(infoUsuario))
+
+    if (Object.entries(infoUsuario).length === 0 && sessionStorage.getItem("user")) setInfoUsuario(JSON.parse(sessionStorage.getItem("user")))
 
     return (
         <CartContext>
             <BrowserRouter>
-                <NavBar user={user} img={img} />
+                <NavBar user={user} img={img} setInfoUsuario={setInfoUsuario} />
                 <Header greeting={greeting} />
                 <Routes>
                     <Route path="/" element={<Main />} />
