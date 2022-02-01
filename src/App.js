@@ -12,6 +12,8 @@ import ItemDeleteModal from "./components/ItemDeleteModal";
 import Order from "./components/Order";
 import Login from "./components/Login";
 import Signin from "./components/Signin";
+import PurchaseForm from "./components/PurchaseForm";
+import Perfil from "./components/Perfil";
 
 function App() {
 
@@ -36,8 +38,10 @@ function App() {
                     <Route path="/" element={<Main />} />
                     <Route path="/cat/:tag" element={<Main />} />
                     <Route path="/item/:id" element={<ItemDetailContainer setItemAddModal={setItemAddModal} user={user} />} />
-                    <Route path="/cart" element={<Cart setItemDeleteModal={setItemDeleteModal} setItemToDelete={setItemToDelete} setOrder={setOrder} setOrderId={setOrderId} />} />
-                    <Route path="/order/" element={<Order order={order} orderId={orderId} />} />
+                    <Route path="/cart" element={<Cart setItemDeleteModal={setItemDeleteModal} setItemToDelete={setItemToDelete} />} />
+                    <Route path="/purchase" element={<PurchaseForm infoUsuario={infoUsuario} setOrder={setOrder} setOrderId={setOrderId} />} />
+                    <Route path="/order/:id" element={<Order order={order} orderId={orderId} />} />
+                    <Route path="/mi-perfil" element={<Perfil infoUsuario={infoUsuario} setOrder={setOrder} setOrderId={setOrderId} />} />
                     <Route path="/login" element={<Login setInfoUsuario={setInfoUsuario} />} />
                     <Route path="/signin" element={<Signin />} />
                 </Routes>

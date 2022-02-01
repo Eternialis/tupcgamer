@@ -6,7 +6,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { database } from './firebase'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 
-const Cart = ({ setItemDeleteModal, setItemToDelete, setOrder, setOrderId }) => {
+const Cart = ({ setItemDeleteModal, setItemToDelete }) => {
 
     const { cartItems, totalPrice, cantidadTotal, cartReducer } = useContext(context)
 
@@ -20,36 +20,6 @@ const Cart = ({ setItemDeleteModal, setItemToDelete, setOrder, setOrderId }) => 
         setItemDeleteModal(true)
     }
 
-    const confirmarCompra = () => {
-        const coleccionPedidos = collection(database, "pedidos")
-        const usuario = {
-            username: "Eternialis",
-            nombre: "Luca Hardmeier",
-            email: "hardmeierluca@gmail.com",
-            direccion: "Callefalsa 123",
-            telefono: "1149378791"
-        }
-        const compra = {
-            usuario,
-            cartItems,
-            totalPrice,
-            cantidadTotal,
-            created_at: serverTimestamp()
-        }
-        setOrder(compra)
-        const pedido = addDoc(coleccionPedidos, compra)
-        pedido
-            .then((resultado) => {
-                cartReducer({
-                    status: "quitarTodo"
-                })
-                console.log(resultado.id)
-                setOrderId(resultado.id)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    }
     return (
         <main className='cartContainer'>
             <h2>Tu carrito:</h2>
@@ -77,7 +47,7 @@ const Cart = ({ setItemDeleteModal, setItemToDelete, setOrder, setOrderId }) => 
             {cartItems.length > 0 ?
                 <div>
                     <p>Precio total: $ {totalPrice} </p>
-                    <Link to={`/order`} onClick={confirmarCompra}>Confirmar compra</Link>
+                    <Link to={`/purchase`}>Confirmar compra</Link>
                 </div> : null}
         </main>
     )

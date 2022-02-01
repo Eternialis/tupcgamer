@@ -17,7 +17,7 @@ function NavBar({ user, img }) {
                 <Link to="/" >
                     <li>productos</li>
                 </Link>
-                <li>contacto</li>
+                <li><Link to={"/mi-perfil"}>Mi perfil</Link></li>
                 <li id="vistaEdicion"><Link to="/vistaEdicion">vista Edición</Link></li>
                 <li id="logout">Cerrar sesión</li>
             </ul>

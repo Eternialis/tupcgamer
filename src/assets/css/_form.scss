@@ -1,6 +1,6 @@
 @import './variables';
 
-form {
+.formContainer {
     display: flex;
     flex-flow: column;
     justify-content: space-between;
@@ -8,15 +8,15 @@ form {
     padding-bottom: 0;
     background-color: var(--var-secondary);
 
-    div {
+    .formItem {
         display: flex;
         flex-direction: column;
         margin-bottom: 1em;
         width: 350px;
 
 
-        label {
-            color: var(--var-primary);
+        .formContainer__text {
+            color: black;
             font-size: 1.5em;
             font-weight: 700;
             margin-bottom: 0.5em;

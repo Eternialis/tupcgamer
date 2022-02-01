@@ -1,7 +1,7 @@
 import ItemList from "./ItemList"
 import { useEffect, useState } from "react"
 import { itemCollection } from "./firebase";
-import { addDoc, getDocs, query, where } from "firebase/firestore";
+import { addDoc, getDocs, orderBy, query, where } from "firebase/firestore";
 
 function ItemListContainer({ filter, loading, setLoading }) {
 
@@ -17,6 +17,7 @@ function ItemListContainer({ filter, loading, setLoading }) {
         filter.tag && collectionAndFilters.push(where("tag", "==", filter.tag))
         filter.desde && collectionAndFilters.push(where("price", ">=", filter.desde))
         filter.hasta && collectionAndFilters.push(where("price", "<=", filter.hasta))
+        filter.orden && collectionAndFilters.push(orderBy("price", filter.orden))
         // Hacer filtro de name con el filter
         const consulta = query(...collectionAndFilters)
 

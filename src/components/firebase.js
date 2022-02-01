@@ -19,3 +19,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const database = getFirestore(app)
 export const itemCollection = collection(database, "productos")
+export const coleccionOrdenes = collection(database, "ordenes")

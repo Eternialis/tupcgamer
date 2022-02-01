@@ -7,10 +7,11 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons"
 function Main() {
 
     // Variables de filtro de rango de precios //
-    const [desde, setDesde] = useState("");
-    const [hasta, setHasta] = useState("");
+    const [desde, setDesde] = useState("")
+    const [hasta, setHasta] = useState("")
     let { tag: tagName } = useParams()
-    const [filter, setFilter] = useState({ tag: "", desde: "", hasta: "" })
+    const [orden, setOrden] = useState("")
+    const [filter, setFilter] = useState({ tag: "", desde: "", hasta: "", orden: "" })
     // Estado de carga //
     const [loading, setLoading] = useState(true)
 
@@ -23,14 +24,15 @@ function Main() {
     }, [tagName]);
 
     const filterItems = (e) => {
-        //Revisar
         if (e.target.text === "Mostrar Todo") {
             setDesde("")
             setHasta("")
+            setOrden("")
             setFilter({
                 ...filter,
                 desde: "",
-                hasta: ""
+                hasta: "",
+                orden: ""
             })
         }
         setLoading(true)
@@ -40,8 +42,8 @@ function Main() {
         e.preventDefault()
         setFilter({
             ...filter,
-            desde: desde,
-            hasta: hasta
+            desde,
+            hasta
         })
     }
 
@@ -51,6 +53,14 @@ function Main() {
 
     const handleChangeHasta = (e) => {
         setHasta(Number(e.target.value))
+    }
+
+    const handleChangeOrden = (e) => {
+        setOrden(e.target.value)
+        setFilter({
+            ...filter,
+            orden: e.target.value
+        })
     }
 
 
@@ -78,6 +88,12 @@ function Main() {
                     </div>
                     <button type="submit"><FontAwesomeIcon icon={faChevronRight} /> </button>
                 </form>
+                <h3>Ordenar:</h3>
+                <select name="orden" value={orden} onChange={handleChangeOrden}>
+                    <option value=""></option>
+                    <option value="desc">por precio de mayor a menor</option>
+                    <option value="asc">por precio de menor a mayor</option>
+                </select>
             </div>
             <ItemListContainer filter={filter} loading={loading} setLoading={setLoading} />
 
