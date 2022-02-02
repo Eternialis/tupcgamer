@@ -1,7 +1,7 @@
 import { addDoc, serverTimestamp } from "firebase/firestore";
 import { useContext, useEffect, useReducer, useState } from "react";
 import { context } from "./CartContext";
-import { coleccionOrdenes, database } from "./firebase";
+import { coleccionOrdenes } from "./firebase";
 import { useNavigate } from "react-router-dom"
 
 const reducer = (state, action) => {
@@ -30,7 +30,6 @@ const PurchaseForm = ({ infoUsuario, setOrder, setOrderId }) => {
 
     const { nombre, apellido, email, pais, provincia, ciudad, direccion, telefono } = state
 
-    //Validaciones
     const [emailVal, setEmailVal] = useState(true);
     const [nombreVal, setNombreVal] = useState(true);
     const [apellidoVal, setApellidoVal] = useState(true);
@@ -147,7 +146,6 @@ const PurchaseForm = ({ infoUsuario, setOrder, setOrderId }) => {
                     <button type='formInput logBtn' className='btn'>Confirmar compra</button>
                 </div>
             </form>
-
         </main>
     );
 };

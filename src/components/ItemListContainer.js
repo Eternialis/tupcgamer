@@ -9,16 +9,14 @@ function ItemListContainer({ filter, loading, setLoading, search }) {
 
 
     useEffect(() => {
-        // Funcion usada para agregar todos los productos del array de productos a la base de datos
-        //productos.forEach(item => addDoc(itemCollection, item))
-        // Probar el orderBy para ordenar los productos por precio de menor a mayor y viceversa
+
         const collectionAndFilters = [itemCollection]
 
         filter.tag && collectionAndFilters.push(where("tag", "==", filter.tag))
         filter.desde && collectionAndFilters.push(where("price", ">=", filter.desde))
         filter.hasta && collectionAndFilters.push(where("price", "<=", filter.hasta))
         filter.orden && collectionAndFilters.push(orderBy("price", filter.orden))
-        // Hacer filtro de name con el filter
+
         const consulta = query(...collectionAndFilters)
 
         getDocs(consulta)

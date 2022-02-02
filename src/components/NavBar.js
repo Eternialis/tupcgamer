@@ -1,9 +1,6 @@
 import logo from '../assets/img/logotipo.svg'
 import Carrito from './CartWidget'
 import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useState } from 'react'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 
 function NavBar({ user, img, setInfoUsuario, setSearch, search }) {

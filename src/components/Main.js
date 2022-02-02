@@ -7,13 +7,12 @@ import Header from "./Header"
 
 function Main({ search, nombre }) {
 
-    // Variables de filtro de rango de precios //
     const [desde, setDesde] = useState("")
     const [hasta, setHasta] = useState("")
     let { tag: tagName } = useParams()
     const [orden, setOrden] = useState("")
     const [filter, setFilter] = useState({ tag: "", desde: "", hasta: "", orden: "" })
-    // Estado de carga //
+
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {

@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, where } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { coleccionOrdenes } from "./firebase";
@@ -18,7 +18,7 @@ const Perfil = ({ infoUsuario, setOrder, setOrderId }) => {
         e.preventDefault()
         console.log(compra)
         if (compra.trim() !== "") {
-            const orden = getDoc(doc(coleccionOrdenes, compra))
+            getDoc(doc(coleccionOrdenes, compra))
                 .then((orden) => {
                     if (orden.data()) {
                         setOrder(orden.data())
@@ -30,7 +30,7 @@ const Perfil = ({ infoUsuario, setOrder, setOrderId }) => {
                     }
                 })
                 .catch((error) => {
-
+                    console.log(error)
                 })
         } else {
             setError(true)

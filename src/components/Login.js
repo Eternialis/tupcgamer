@@ -1,8 +1,8 @@
-import { collection, doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/img/logotipo.svg'
-import { database, usersCollection } from './firebase';
+import { usersCollection } from './firebase';
 
 const Login = ({ setInfoUsuario }) => {
 
@@ -13,7 +13,7 @@ const Login = ({ setInfoUsuario }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const userInfo = getDoc(doc(usersCollection, user))
+        getDoc(doc(usersCollection, user))
             .then((usuario) => {
                 if (usuario.data().pass === pass) {
                     setInfoUsuario({ user: usuario.id, ...usuario.data() })
