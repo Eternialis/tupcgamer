@@ -55,8 +55,8 @@ const CartContext = ({ children }) => {
     }
 
     useEffect(() => {
-        const carritoEnSession = { item: JSON.parse(sessionStorage.getItem("carrito")), status: "restaurarCarrito" }
-        carritoEnSession.item && cartReducer(carritoEnSession)
+        const carritoEnSession = JSON.parse(sessionStorage.getItem("carrito"))
+        carritoEnSession && cartReducer({ item: carritoEnSession, status: "restaurarCarrito" })
     }, []);
 
 

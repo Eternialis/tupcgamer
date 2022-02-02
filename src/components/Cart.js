@@ -3,12 +3,10 @@ import { context } from './CartContext'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-import { database } from './firebase'
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 
 const Cart = ({ setItemDeleteModal, setItemToDelete }) => {
 
-    const { cartItems, totalPrice, cantidadTotal, cartReducer } = useContext(context)
+    const { cartItems, totalPrice, cantidadTotal } = useContext(context)
 
     const handleRemove = (item) => {
         setItemToDelete(item)
@@ -35,10 +33,10 @@ const Cart = ({ setItemDeleteModal, setItemToDelete }) => {
                             <div key={item.id} className='itemCard'>
                                 <img src={item.img} alt={item.name} className='itemCard__img' />
                                 <div className="itemCard__text">
-                                    <h4 className='itemCard__title'>{item.name}</h4>
+                                    <Link to={`/item/${item.id}`} className='itemCard__title'>{item.name}</Link>
                                     <p>Precio: $ {item.price}</p>
                                     <p>Cantidad: {item.cantidad}</p>
-                                    <button><FontAwesomeIcon icon={faTrashAlt} onClick={() => handleRemove(item)} /></button>
+                                    <button onClick={() => handleRemove(item)} ><FontAwesomeIcon icon={faTrashAlt} /></button>
                                 </div>
                             </div>
                         )

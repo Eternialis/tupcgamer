@@ -1,8 +1,8 @@
 
-const Header = ({ greeting }) => {
+const Header = ({ nombre }) => {
     return (
         <header className="clientHeader">
-            <h2>{greeting} </h2>
+            <h2>Bienvenido {nombre} </h2>
         </header>
     )
 }

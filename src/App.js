@@ -1,5 +1,4 @@
 import NavBar from "./components/NavBar";
-import Header from "./components/Header"
 import UserImg from "./assets/img/usuario/usernamemini.jpg"
 import Cart from "./components/Cart";
 import Main from "./components/Main"
@@ -18,9 +17,8 @@ import Perfil from "./components/Perfil";
 function App() {
 
     const [infoUsuario, setInfoUsuario] = useState({});
-    const { user, nombres } = infoUsuario
+    const { user, nombre } = infoUsuario
     const img = UserImg
-    const greeting = `Bienvenido ${nombres}`
 
     const [itemAddModal, setItemAddModal] = useState(false)
     const [itemDeleteModal, setItemDeleteModal] = useState(false)
@@ -29,18 +27,17 @@ function App() {
     const [order, setOrder] = useState({})
     const [orderId, setOrderId] = useState("")
 
-    console.log(Object.entries(infoUsuario))
+    const [search, setSearch] = useState("");
 
     if (Object.entries(infoUsuario).length === 0 && sessionStorage.getItem("user")) setInfoUsuario(JSON.parse(sessionStorage.getItem("user")))
 
     return (
         <CartContext>
             <BrowserRouter>
-                <NavBar user={user} img={img} setInfoUsuario={setInfoUsuario} />
-                <Header greeting={greeting} />
+                <NavBar user={user} img={img} setInfoUsuario={setInfoUsuario} setSearch={setSearch} search={search} />
                 <Routes>
-                    <Route path="/" element={<Main />} />
-                    <Route path="/cat/:tag" element={<Main />} />
+                    <Route path="/" element={<Main search={search} nombre={nombre} />} />
+                    <Route path="/cat/:tag" element={<Main search={search} />} />
                     <Route path="/item/:id" element={<ItemDetailContainer setItemAddModal={setItemAddModal} user={user} />} />
                     <Route path="/cart" element={<Cart setItemDeleteModal={setItemDeleteModal} setItemToDelete={setItemToDelete} />} />
                     <Route path="/purchase" element={<PurchaseForm infoUsuario={infoUsuario} setOrder={setOrder} setOrderId={setOrderId} />} />

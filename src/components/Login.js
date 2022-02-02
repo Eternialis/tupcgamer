@@ -2,7 +2,7 @@ import { collection, doc, getDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/img/logotipo.svg'
-import { database } from './firebase';
+import { database, usersCollection } from './firebase';
 
 const Login = ({ setInfoUsuario }) => {
 
@@ -13,7 +13,6 @@ const Login = ({ setInfoUsuario }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const usersCollection = collection(database, "usuarios")
         const userInfo = getDoc(doc(usersCollection, user))
             .then((usuario) => {
                 if (usuario.data().pass === pass) {
