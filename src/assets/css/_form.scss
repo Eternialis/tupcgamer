@@ -1,5 +1,13 @@
 @import './variables';
 
+input {
+    @include input;
+}
+
+.inputDyn {
+    @include inputDyn;
+}
+
 .formContainer {
     display: flex;
     flex-flow: column;
@@ -30,6 +38,7 @@
 
         .formInput {
             @include input;
+            @include inputDyn;
         }
 
         .inputError {
@@ -54,46 +63,6 @@
         @include successContainer;
     }
 
-    #errorMsjTitulo {
-        display: none;
-    }
-
-    #errorMsjPrecio {
-        display: none;
-    }
-
-    #errorMsjStock {
-        display: none;
-    }
-
-    #errorMsjImg {
-        display: none;
-    }
-
-    #errorMsjGeneral {
-        display: none;
-    }
-
-    #successMsjGeneral {
-        display: none;
-    }
-
-    #errorMsjNombreFab {
-        display: none;
-    }
-
-    #errorMsjOrigenFab {
-        display: none;
-    }
-
-    #errorMsjGeneralFab {
-        display: none;
-    }
-
-    #successMsjGeneralFab {
-        display: none;
-    }
-
     .numeros {
         flex-direction: row;
         align-items: baseline;
@@ -105,6 +74,7 @@
 
         .formInput {
             width: 100%;
+            @include inputDyn;
         }
 
 
@@ -126,5 +96,39 @@
                 background-color: var(--var-highlight);
             }
         }
+    }
+}
+
+label {
+    font-weight: 700;
+    font-size: 1.2em;
+    letter-spacing: 0.3em;
+    margin-bottom: 0.8em
+}
+
+#errorMsj {
+    margin-top: 0;
+    text-align: justify;
+    padding: 0.2em;
+    @include errorContainer;
+
+    a {
+        color: black;
+    }
+}
+
+.submitBtn {
+    align-self: flex-end;
+    padding: 0.5em;
+    margin: 0;
+    background-color: black;
+    color: white;
+    border: none;
+    font-family: "Chakra Petch", sans-serif;
+
+    &:hover {
+        background-color: var(--var-highlight);
+        color: black;
+        font-weight: bold;
     }
 }

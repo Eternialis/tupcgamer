@@ -62,7 +62,6 @@ const PurchaseForm = ({ infoUsuario, setOrder, setOrderId }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-
         if (!validations.some(val => val === false)) {
             const usuario = {
                 nombre: nombre.trim() + " " + apellido.trim(),

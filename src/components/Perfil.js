@@ -38,12 +38,12 @@ const Perfil = ({ infoUsuario, setOrder, setOrderId }) => {
     }
 
     return (
-        <div>
+        <div className="perfilContainer">
             <h3>Mis compras</h3>
-            <form className='formContainer' onSubmit={handleSubmit} >
-                <label htmlFor="compra">Ingresá el código que te dimos al hacer la compra para ver el resumen</label>
+            <form className='formContainer ' onSubmit={handleSubmit} >
+                <label htmlFor="compra">Ingresá el código que te dimos al hacer la compra para ver el resumen:</label>
                 <input type="text" name="compra" onChange={handleChange} />
-                <button type="submit">Buscar</button>
+                <button className="submitBtn" type="submit">Buscar</button>
                 {error && <p className='errorMsj'>Código de compra incorrecto</p>}
             </form>
         </div>

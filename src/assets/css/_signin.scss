@@ -3,6 +3,10 @@
 .formSignin {
 
     .fecha {
-        align-items: flex-start;
+        // align-items: flex-start;
+
+        div {
+            width: 100%;
+        }
     }
 }

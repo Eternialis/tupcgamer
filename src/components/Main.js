@@ -70,14 +70,14 @@ function Main({ search, nombre }) {
             <main>
                 {/* Los filters meterlos en un componente aparte */}
                 <div className="filters">
-                    <h3 id="clearFilters"><Link to={"/"} onClick={filterItems} element={<Main />}>Mostrar Todo</Link></h3>
+                    <Link to={"/"} onClick={filterItems} element={<Main />}><h3 id="clearFilters">Mostrar Todo</h3></Link>
                     <ul>
-                        <li><Link to={"/cat/microprocesador"} onClick={filterItems} element={<Main />}>Microprocesador</Link></li>
-                        <li><Link to={"/cat/placa"} onClick={filterItems} element={<Main />}>Placa</Link></li>
-                        <li><Link to={"/cat/fuente"} onClick={filterItems} element={<Main />}>Fuente</Link></li>
-                        <li><Link to={"/cat/gabinete"} onClick={filterItems} element={<Main />}>Gabinete</Link></li>
+                        <Link to={"/cat/microprocesador"} onClick={filterItems} element={<Main />}><li>Microprocesador</li></Link>
+                        <Link to={"/cat/placa"} onClick={filterItems} element={<Main />}><li>Placa</li></Link>
+                        <Link to={"/cat/fuente"} onClick={filterItems} element={<Main />}><li>Fuente</li></Link>
+                        <Link to={"/cat/gabinete"} onClick={filterItems} element={<Main />}><li>Gabinete</li></Link>
                     </ul>
-                    <h3>Precios:</h3>
+                    <h4>Precios:</h4>
                     <form onSubmit={handleSubmitPrecios}>
                         <label target="desde">Desde:</label>
                         <div className="inputPrecio">
@@ -89,9 +89,9 @@ function Main({ search, nombre }) {
                             <p>$</p>
                             <input type="number" name="hasta" id="hasta" value={hasta} onChange={handleChangeHasta} />
                         </div>
-                        <button type="submit"><FontAwesomeIcon icon={faChevronRight} /> </button>
+                        <button className="submitBtn" type="submit"><FontAwesomeIcon icon={faChevronRight} /> </button>
                     </form>
-                    <h3>Ordenar:</h3>
+                    <h4>Ordenar:</h4>
                     <select name="orden" value={orden} onChange={handleChangeOrden}>
                         <option value=""></option>
                         <option value="desc">por precio de mayor a menor</option>

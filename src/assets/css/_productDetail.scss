@@ -3,8 +3,9 @@
 .productDetailContainer {
     display: flex;
     justify-content: space-around;
-    margin: 0 2em;
-    margin-bottom: 2em;
+    background-color: white;
+    margin: 3em 2em;
+    padding: 1.5em;
 
 
     .productDetailContainer__img {
@@ -18,6 +19,8 @@
         justify-content: space-between;
         width: 700px;
         margin-left: 1em;
+        background-color: var(--var-secondary);
+        padding: 1em;
 
         h1 {
             font-size: 1.5em;
@@ -46,6 +49,8 @@
                 width: 1.5em;
                 height: 1.5em;
                 margin: 1em;
+                background-color: black;
+                color: white;
             }
         }
 

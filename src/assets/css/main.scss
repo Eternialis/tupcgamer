@@ -7,6 +7,18 @@
 @import './loader';
 @import './signin';
 
+:root {
+    --var-primary: #d09900;
+    --var-secondary: #d099d0;
+    --var-highlight: #feee00;
+    --var-success: #1d8719;
+    --var-success-dark: #0c5309;
+    --var-success-light: #48d643;
+
+    --var-danger: #c90000;
+    --var-danger-dark: #610101;
+    --var-danger-light: #f33b3b;
+}
 
 body {
     margin: 0;
@@ -15,6 +27,194 @@ body {
     font-family: "Chakra Petch", sans-serif;
     font-family: "Indie Flower", cursive;
     font-family: "Roboto Mono", monospace;
+}
+
+.navBar {
+    position: sticky;
+    display: flex;
+    background-color: var(--var-secondary);
+    padding: 0.5em 0.8em;
+    align-items: center;
+
+
+    .logo {
+        display: flex;
+        align-items: center;
+        width: 125px;
+        color: black;
+        text-decoration: none;
+
+        h1 {
+            margin: 0;
+            line-height: 0.8em;
+        }
+
+        img {
+            width: 45px;
+            height: auto;
+        }
+    }
+
+    form {
+
+        display: flex;
+        background-color: white;
+        padding: 0.3em;
+        align-items: center;
+        width: 100%;
+        margin: 0 1em;
+
+        svg {
+            margin-left: 0.5em;
+        }
+
+        input {
+            all: unset;
+            border-bottom: solid 1px gray;
+            width: 100%;
+            margin: 0.3em 0 0.3em 0.5em;
+
+            &:focus {
+                border-bottom: solid 1px gray;
+            }
+        }
+    }
+
+    .links {
+        list-style-type: none;
+        display: flex;
+        justify-content: space-evenly;
+        padding: 0;
+        cursor: pointer;
+        white-space: nowrap;
+
+        li {
+            margin-left: 0.5em;
+            margin-right: 0.5em;
+
+            a {
+                color: black;
+                text-decoration: none;
+            }
+
+            &:hover {
+                font-weight: 700;
+            }
+        }
+    }
+
+    #nouser {
+        margin: 0;
+        display: flex;
+        align-items: center;
+
+        #login {
+            padding: 0.5em;
+            background-color: black;
+            text-decoration: none;
+            color: white;
+            white-space: nowrap;
+        }
+
+        #signin {
+            padding: 0.5em;
+            background-color: var(--var-highlight);
+            font-weight: bold;
+            text-decoration: none;
+            color: black;
+            margin-left: 0.5em;
+        }
+
+    }
+
+    #user {
+        margin: 0;
+        display: flex;
+        align-items: center;
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        #cart {
+            display: flex;
+            align-items: center;
+            position: relative;
+
+            p {
+                margin-left: 0.2em;
+            }
+
+            #list {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 50px;
+                left: -185px;
+                width: 200px;
+                font-size: 0.8em;
+                background-color: black;
+                padding: 0 0.3em 0.3em 0.3em;
+
+                ul {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+
+                    li {
+                        width: 100%;
+                        background-color: white;
+                        margin-top: 0.3em;
+                        cursor: pointer;
+                    }
+                }
+
+                div {
+                    @include btnsContainer;
+                    margin-top: 0.3em;
+                    width: 100%;
+                    justify-content: flex-end;
+                    height: auto;
+
+                    button {
+                        @include btn;
+                        font-size: 1.05em;
+                        width: auto;
+                        padding: 0.5em;
+                        font-weight: 700;
+                    }
+
+                    #finalizarCompra {
+                        @include successContainer;
+                    }
+
+                    #borrarCompra {
+                        @include errorContainer;
+                        margin-left: 0.3em;
+                    }
+                }
+
+            }
+
+        }
+
+        #profile {
+            display: flex;
+            align-items: center;
+
+            p {
+                margin: 0 0.5em;
+            }
+
+            .img {
+                height: 50px;
+                width: 50px;
+                background-color: gray;
+                border-radius: 50%;
+            }
+        }
+    }
 }
 
 header {

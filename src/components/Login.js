@@ -46,7 +46,7 @@ const Login = ({ setInfoUsuario }) => {
                 <label target="password">contraseña</label>
                 <input type="password" id="password" name="password" className="formInput" onChange={handleChangePass} />
                 {error && <p className='errorMsj'>El usuario o contraseña ingresados son incorrectos. ¿No tiene una cuenta? Registrese <a href="./signin.html">acá</a>.</p>}
-                <button className="formInput logBtn" type='submit'>Iniciar Sesión</button>
+                <button className="formInput submitBtn" type='submit'>Iniciar Sesión</button>
             </form>
         </>
     )

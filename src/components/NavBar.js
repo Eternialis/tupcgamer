@@ -1,6 +1,8 @@
 import logo from '../assets/img/logotipo.svg'
 import Carrito from './CartWidget'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 
 function NavBar({ user, img, setInfoUsuario, setSearch, search }) {
@@ -26,18 +28,16 @@ function NavBar({ user, img, setInfoUsuario, setSearch, search }) {
                 <h1>tu pc gamer</h1>
                 <img src={logo} alt="tu pc gamer" />
             </Link>
-            <ul className="links">
-                <li><Link to="/" >productos</Link></li>
-                {user ?
-                    <>
-                        <li><Link to={"/mi-perfil"}>Mi perfil</Link></li>
-                        <li id="logout" onClick={handleClick}>Cerrar sesión</li>
-                    </>
-                    : null}
-            </ul>
             <form onSubmit={handleSubmit}>
+                <FontAwesomeIcon icon={faSearch} />
                 <input type="text" placeholder='Buscar...' value={search} onChange={handleChange} />
             </form>
+            {user ?
+                <ul className="links">
+                    <li><Link to={"/mi-perfil"}>Mi perfil</Link></li>
+                    <li id="logout" onClick={handleClick}>Cerrar sesión</li>
+                </ul>
+                : null}
             {!user ? <div id='nouser'>
                 <Link to="/login" id="login">Iniciar Sesión</Link>
                 <Link to="/signin" id="signin">Registrarse</Link>

@@ -39,40 +39,4 @@
     padding: 1em;
     margin-bottom: 5em;
 
-    label {
-        font-weight: 700;
-        font-size: 1.2em;
-        letter-spacing: 0.3em;
-        margin-bottom: 0.8em
-    }
-
-    input {
-        @include input;
-        margin-bottom: 1em
-    }
-
-    #errorMsj {
-        margin-top: 0;
-        text-align: justify;
-        padding: 0.2em;
-        @include errorContainer;
-
-        a {
-            color: black;
-        }
-    }
-
-    .logBtn {
-        align-self: flex-end;
-        padding: 0.5em;
-        margin: 0;
-        background-color: black;
-        color: white;
-
-        &:hover {
-            background-color: var(--var-highlight);
-            color: black;
-            font-weight: bold;
-        }
-    }
 }
