@@ -41,12 +41,12 @@ const Login = ({ setInfoUsuario }) => {
                 <img src={logo} alt="tu pc gamer" />
             </header>
             <form className="loginContainer" onSubmit={handleSubmit}>
-                <label target="username">usuario</label>
+                <label className="formLabel" target="username">usuario</label>
                 <input type="text" id="username" name="username" className="formInput" onChange={handleChangeUser} />
-                <label target="password">contraseña</label>
+                <label className="formLabel" target="password">contraseña</label>
                 <input type="password" id="password" name="password" className="formInput" onChange={handleChangePass} />
                 {error && <p className='errorMsj'>El usuario o contraseña ingresados son incorrectos. ¿No tiene una cuenta? Registrese <a href="./signin.html">acá</a>.</p>}
-                <button className="formInput submitBtn" type='submit'>Iniciar Sesión</button>
+                <button className="submitBtn" type='submit'>Iniciar Sesión</button>
             </form>
         </>
     )

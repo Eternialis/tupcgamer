@@ -2,11 +2,53 @@
 
 .formSignin {
 
-    .fecha {
-        // align-items: flex-start;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
 
-        div {
-            width: 100%;
+
+    .formContainer {
+        display: flex;
+        align-items: center;
+        padding-bottom: 1em;
+
+        .formDate {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            margin-bottom: 1em;
+
+            .formContainer__text {
+                color: black;
+                font-size: 1.5em;
+                font-weight: 700;
+                margin-bottom: 0.5em;
+                width: 350px;
+            }
+
+            .formContainer__text {
+                color: black;
+                font-size: 1.5em;
+                font-weight: 700;
+                margin-bottom: 0.5em;
+            }
+
+            .react-date-picker__wrapper {
+
+
+                .react-date-picker__inputGroup {
+                    padding: 0.5em;
+                    font-size: 0.8em;
+                }
+            }
+
+        }
+
+        h3 {
+            font-size: 1em;
         }
     }
+
 }

@@ -39,4 +39,20 @@
     padding: 1em;
     margin-bottom: 5em;
 
+    .formLabel {
+        font-weight: 700;
+        font-size: 1.2em;
+        letter-spacing: 0.3em;
+        margin-bottom: 0.8em
+    }
+
+    .formInput {
+        @include input;
+        @include inputDyn;
+        margin-bottom: 1em;
+    }
+
+    button {
+        font-size: 1em;
+    }
 }

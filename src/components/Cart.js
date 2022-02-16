@@ -22,11 +22,12 @@ const Cart = ({ setItemDeleteModal, setItemToDelete }) => {
         <main className='cartContainer'>
             <h2>Tu carrito:</h2>
             {cartItems.length > 0 ?
-                <div>
+                <div className='cartContainer__header'>
                     <button onClick={() => handleRemoveAll()} >Vaciar carrito</button>
                     <p>Cantidad de productos comprados: {cantidadTotal} </p>
+                    <p>Precio total: $ {totalPrice} </p>
                 </div> : null}
-            <div>
+            <div className='cartContainer__body'>
                 {!cartItems.length ? <h3>¡Ups, tu carrito está vacío! Comenzá a comprar <Link to="/">acá</Link>.</h3> :
                     cartItems.map((item) => {
                         return (
@@ -35,17 +36,18 @@ const Cart = ({ setItemDeleteModal, setItemToDelete }) => {
                                 <div className="itemCard__text">
                                     <Link to={`/item/${item.id}`} className='itemCard__title'>{item.name}</Link>
                                     <p>Precio: $ {item.price}</p>
-                                    <p>Cantidad: {item.cantidad}</p>
-                                    <button onClick={() => handleRemove(item)} ><FontAwesomeIcon icon={faTrashAlt} /></button>
+                                    <div>
+                                        <p>Cantidad: {item.cantidad}</p>
+                                        <button onClick={() => handleRemove(item)} ><FontAwesomeIcon icon={faTrashAlt} /></button>
+                                    </div>
                                 </div>
                             </div>
                         )
                     })}
             </div>
             {cartItems.length > 0 ?
-                <div>
-                    <p>Precio total: $ {totalPrice} </p>
-                    <Link to={`/purchase`}>Confirmar compra</Link>
+                <div className='cartContainer__submit'>
+                    <Link className='submitBtn' to={`/purchase`}>Confirmar compra</Link>
                 </div> : null}
         </main>
     )

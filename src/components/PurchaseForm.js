@@ -1,76 +1,55 @@
 import { addDoc, serverTimestamp } from "firebase/firestore";
-import { useContext, useEffect, useReducer, useState } from "react";
+import { useContext } from "react";
 import { context } from "./CartContext";
 import { coleccionOrdenes } from "./firebase";
 import { useNavigate } from "react-router-dom"
-
-const reducer = (state, action) => {
-    const { name, value } = action
-    return {
-        ...state,
-        [name]: String(value)
-    }
-}
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 const PurchaseForm = ({ infoUsuario, setOrder, setOrderId }) => {
     let navigate = useNavigate()
 
-    const initialState = {
-        nombre: infoUsuario.nombre,
-        apellido: infoUsuario.apellido,
-        email: infoUsuario.email,
-        pais: infoUsuario.pais,
-        provincia: infoUsuario.provincia,
-        ciudad: infoUsuario.ciudad,
-        direccion: infoUsuario.direccion,
-        telefono: infoUsuario.telefono
-    }
-
-    const [state, dispatch] = useReducer(reducer, initialState);
-
-    const { nombre, apellido, email, pais, provincia, ciudad, direccion, telefono } = state
-
-    const [emailVal, setEmailVal] = useState(true);
-    const [nombreVal, setNombreVal] = useState(true);
-    const [apellidoVal, setApellidoVal] = useState(true);
-    const [paisVal, setPaisVal] = useState(true);
-    const [provinciaVal, setProvinciaVal] = useState(true);
-    const [ciudadVal, setCiudadVal] = useState(true);
-    const [direccionVal, setDireccionVal] = useState(true);
-    const [telefonoVal, setTelefonoVal] = useState(true);
-    const validations = [emailVal, nombreVal, apellidoVal, paisVal, provinciaVal, ciudadVal, direccionVal, telefonoVal]
-
-    useEffect(() => {
-        setEmailVal(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.trim()))
-        setNombreVal(/[a-zA-Z ]$/.test(nombre))
-        setApellidoVal(/[a-zA-Z ]$/.test(apellido))
-        setPaisVal(/[a-zA-Z ]$/.test(pais))
-        setProvinciaVal(/[a-zA-Z ]$/.test(provincia))
-        setCiudadVal(/[a-zA-Z ]$/.test(ciudad))
-        setDireccionVal(/[a-zA-Z0-9 ]$/.test(direccion))
-        setTelefonoVal(/[0-9-+]$/.test(telefono.trim()))
-    }, [state]);
-
-
-    const handleChange = (e) => {
-        const { value, name } = e.target
-        dispatch({ name, value })
-    }
-
-    const { cartItems, totalPrice, cantidadTotal, cartReducer } = useContext(context)
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        if (!validations.some(val => val === false)) {
+    const formik = useFormik({
+        initialValues: {
+            nombre: infoUsuario.nombre,
+            apellido: infoUsuario.apellido,
+            email: infoUsuario.email,
+            pais: infoUsuario.pais,
+            provincia: infoUsuario.provincia,
+            ciudad: infoUsuario.ciudad,
+            direccion: infoUsuario.direccion,
+            telefono: infoUsuario.telefono
+        },
+        validationSchema: Yup.object({
+            nombre: Yup.string()
+                .min(2, "El nombre debe tener 2 caracteres o más.")
+                .required("Obligatorio"),
+            apellido: Yup.string()
+                .min(2, "El apellido debe tener 2 caracteres o más.")
+                .required("Obligatorio"),
+            email: Yup.string()
+                .email("Dirección de mail inválida")
+                .required("Obligatorio"),
+            pais: Yup.string()
+                .matches(/[a-zA-Z ]$/, "Ingrese un nombre de país válido."),
+            provincia: Yup.string()
+                .matches(/[a-zA-Z ]$/, "Ingrese un nombre de provincia válido."),
+            ciudad: Yup.string()
+                .matches(/[a-zA-Z ]$/, "Ingrese un nombre de ciudad válido."),
+            direccion: Yup.string()
+                .matches(/[a-zA-Z0-9 ]$/, "Ingrese una dirección válida."),
+            telefono: Yup.string()
+                .matches(/[0-9-+]$/, "Ingrese un número de teléfono válido."),
+        }),
+        onSubmit: values => {
             const usuario = {
-                nombre: nombre.trim() + " " + apellido.trim(),
-                email: email.trim(),
-                pais: pais.trim(),
-                provincia: pais.trim(),
-                ciudad: ciudad.trim(),
-                direccion: direccion.trim(),
-                telefono: telefono.trim()
+                nombre: values.nombre.trim() + " " + values.apellido.trim(),
+                email: values.email.trim(),
+                pais: values.pais.trim(),
+                provincia: values.pais.trim(),
+                ciudad: values.ciudad.trim(),
+                direccion: values.direccion.trim(),
+                telefono: values.telefono.trim()
             }
             const compra = {
                 usuario,
@@ -93,59 +72,60 @@ const PurchaseForm = ({ infoUsuario, setOrder, setOrderId }) => {
                     console.log(error)
                 })
         }
-    }
+    })
 
+    const { cartItems, totalPrice, cantidadTotal, cartReducer } = useContext(context)
 
     return (
-        <main>
+        <div className="purchaseFormContainer">
             <h3>¡Los productos casi son tuyos!</h3>
             <h4>Antes de terminar, te pedimos que verifiques tu información para que el producto te llegue correctamente.</h4>
-            <form className='formContainer' onSubmit={handleSubmit}>
+            <form className='formContainer' onSubmit={formik.handleSubmit}>
                 <div className='formItem'>
                     <label htmlFor="email" className='formContainer__text'>Email:</label>
-                    <input type="text" name="email" className="formInput" value={email} onChange={handleChange} />
-                    {emailVal || <p className='errorMsj'>Ingrese un email válido.</p>}
+                    <input type="text" {...formik.getFieldProps("email")} />
+                    {formik.touched.email && formik.errors.email ? <p className='errorMsj'>{formik.errors.email}</p> : null}
                 </div>
                 <div className='formItem'>
                     <label htmlFor="nombre" className='formContainer__text'>Nombre:</label>
-                    <input type="text" name="nombre" className="formInput" value={nombre} onChange={handleChange} />
-                    {nombreVal || <p className='errorMsj'>Ingrese un nombre válido.</p>}
+                    <input type="text" {...formik.getFieldProps("nombre")} />
+                    {formik.touched.nombre && formik.errors.nombre ? <p className='errorMsj'>{formik.errors.nombre}</p> : null}
                 </div>
                 <div className='formItem'>
                     <label htmlFor="apellido" className='formContainer__text'>Apellido:</label>
-                    <input type="text" name="apellido" className="formInput" value={apellido} onChange={handleChange} />
-                    {apellidoVal || <p className='errorMsj'>Ingrese un apellido válido.</p>}
+                    <input type="text" {...formik.getFieldProps("apellido")} />
+                    {formik.touched.apellido && formik.errors.apellido ? <p className='errorMsj'>{formik.errors.apellido}</p> : null}
                 </div>
                 <div className='formItem'>
                     <label htmlFor="pais" className='formContainer__text'>Pais de residencia:</label>
-                    <input type="text" name="pais" className="formInput" value={pais} onChange={handleChange} />
-                    {paisVal || <p className='errorMsj'>Ingrese un nombre de país válido.</p>}
+                    <input type="text" {...formik.getFieldProps("pais")} />
+                    {formik.touched.pais && formik.errors.pais ? <p className='errorMsj'>{formik.errors.pais}</p> : null}
                 </div>
                 <div className='formItem'>
                     <label htmlFor="provincia" className='formContainer__text'>Provincia:</label>
-                    <input type="text" name="provincia" className="formInput" value={provincia} onChange={handleChange} />
-                    {provinciaVal || <p className='errorMsj'>Ingrese un nombre de provincia válida.</p>}
+                    <input type="text" {...formik.getFieldProps("provincia")} />
+                    {formik.touched.provincia && formik.errors.provincia ? <p className='errorMsj'>{formik.errors.provincia}</p> : null}
                 </div>
                 <div className='formItem'>
                     <label htmlFor="ciudad" className='formContainer__text'>Ciudad:</label>
-                    <input type="text" name="ciudad" className="formInput" value={ciudad} onChange={handleChange} />
-                    {ciudadVal || <p className='errorMsj'>Ingrese un nombre de ciudad válida.</p>}
+                    <input type="text" {...formik.getFieldProps("ciudad")} />
+                    {formik.touched.ciudad && formik.errors.ciudad ? <p className='errorMsj'>{formik.errors.ciudad}</p> : null}
                 </div>
                 <div className='formItem'>
                     <label htmlFor="direccion" className='formContainer__text'>Dirección:</label>
-                    <input type="text" name="direccion" className="formInput" value={direccion} onChange={handleChange} />
-                    {direccionVal || <p className='errorMsj'>Ingrese una dirección válida.</p>}
+                    <input type="text" {...formik.getFieldProps("direccion")} />
+                    {formik.touched.direccion && formik.errors.direccion ? <p className='errorMsj'>{formik.errors.direccion}</p> : null}
                 </div>
                 <div className='formItem'>
                     <label htmlFor="telefono" className='formContainer__text'>Teléfono:</label>
-                    <input type="text" name="telefono" className="formInput" value={telefono} onChange={handleChange} />
-                    {telefonoVal || <p className='errorMsj'>Ingrese un número de teléfono sin espacios.</p>}
+                    <input type="text" {...formik.getFieldProps("telefono")} />
+                    {formik.touched.telefono && formik.errors.telefono ? <p className='errorMsj'>{formik.errors.telefono}</p> : null}
                 </div>
                 <div>
-                    <button type='formInput logBtn' className='btn'>Confirmar compra</button>
+                    <button type='submit' className='btn submitBtn'>Finalizar compra</button>
                 </div>
             </form>
-        </main>
+        </div>
     );
 };
 

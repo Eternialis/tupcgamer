@@ -1,148 +1,144 @@
 import { doc, setDoc } from 'firebase/firestore';
-import { useEffect, useReducer, useState } from 'react';
+import { useState } from 'react';
 import DatePicker from 'react-date-picker'
 import { database } from './firebase';
 import { useNavigate } from "react-router-dom"
-
-const initialState = {
-    nombre: "",
-    apellido: "",
-    email: "",
-    usuario: "",
-    pass: "",
-    passCheck: "",
-    fechaNacimiento: "",
-    pais: "",
-    provincia: "",
-    ciudad: "",
-    direccion: "",
-    telefono: ""
-}
-
-const reducer = (state, action) => {
-    const { name, value } = action
-    return {
-        ...state,
-        [name]: String(value)
-    }
-}
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 const Signin = () => {
     let navigate = useNavigate()
 
-    const [state, dispatch] = useReducer(reducer, initialState);
-
     const [date, setDate] = useState(new Date());
 
-    const { usuario, pass, passCheck, nombre, apellido, email, pais, provincia, ciudad, direccion, telefono } = state
-
-    const [usuarioVal, setUsuarioVal] = useState(true);
-    const [passVal, setPassVal] = useState(true);
-    const [passCheckVal, setPassCheckVal] = useState(true);
-    const [emailVal, setEmailVal] = useState(true);
-    const [nombreVal, setNombreVal] = useState(true);
-    const [apellidoVal, setApellidoVal] = useState(true);
-    const [paisVal, setPaisVal] = useState(true);
-    const [provinciaVal, setProvinciaVal] = useState(true);
-    const [ciudadVal, setCiudadVal] = useState(true);
-    const [direccionVal, setDireccionVal] = useState(true);
-    const [telefonoVal, setTelefonoVal] = useState(true);
-    const validations = [usuarioVal, passVal, passCheckVal, emailVal, nombreVal, apellidoVal, paisVal, provinciaVal, ciudadVal, direccionVal, telefonoVal]
-
-    useEffect(() => {
-        setUsuarioVal(/[a-zA-Z0-9]{3,18}$/.test(usuario.trim()))
-        setPassVal(/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/.test(pass.trim()))
-        setPassCheckVal(pass === passCheck)
-        setEmailVal(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.trim()))
-        setNombreVal(/[a-zA-Z ]$/.test(nombre))
-        setApellidoVal(/[a-zA-Z ]$/.test(apellido))
-        setPaisVal(/[a-zA-Z ]$/.test(pais))
-        setProvinciaVal(/[a-zA-Z ]$/.test(provincia))
-        setCiudadVal(/[a-zA-Z ]$/.test(ciudad))
-        setDireccionVal(/[a-zA-Z0-9 ]$/.test(direccion))
-        setTelefonoVal(/[0-9-+]$/.test(telefono.trim()))
-    }, [state]);
-
-    const handleChange = (e) => {
-        const { value, name } = e.target
-        dispatch({ name, value })
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        if (!validations.some(val => val === false)) {
-            setDoc(doc(database, "usuarios", state.usuario), state)
+    const formik = useFormik({
+        initialValues: {
+            nombre: "",
+            apellido: "",
+            email: "",
+            usuario: "",
+            pass: "",
+            passCheck: "",
+            fechaNacimiento: new Date(),
+            pais: "",
+            provincia: "",
+            ciudad: "",
+            direccion: "",
+            telefono: ""
+        },
+        validationSchema: Yup.object({
+            nombre: Yup.string()
+                .min(2, "El nombre debe tener 2 caracteres o más.")
+                .required("Obligatorio"),
+            apellido: Yup.string()
+                .min(2, "El apellido debe tener 2 caracteres o más.")
+                .required("Obligatorio"),
+            email: Yup.string()
+                .email("Dirección de mail inválida")
+                .required("Obligatorio"),
+            usuario: Yup.string()
+                .min(8, "El nombre de usuario debe poseer entre 8 y 15 caracteres alfanuméricos.")
+                .max(15, "El nombre de usuario debe poseer entre 8 y 15 caracteres alfanuméricos.")
+                .matches(/[a-zA-Z0-9]$/, "El nombre de usuario debe poseer entre 8 y 15 caracteres alfanuméricos.")
+                .required("Obligatorio"),
+            pass: Yup.string()
+                .matches(/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/, "La contraseña debe tener un mínimo de 8 caracteres y poseer al menos un número, un caracter especial, una letra mayúscula y una minúscula."),
+            passCheck: Yup.string()
+                .test("pass-igual",
+                    () => "La contraseña y su confirmación deben coincidir.",
+                    (value) => value == null || value === formik.values.pass)
+                .required("Obligatorio"),
+            fechaNacimiento: Yup.date(),
+            pais: Yup.string()
+                .optional()
+                .matches(/[a-zA-Z ]$/, "Ingrese un nombre de país válido."),
+            provincia: Yup.string()
+                .optional()
+                .matches(/[a-zA-Z ]$/, "Ingrese un nombre de provincia válido."),
+            ciudad: Yup.string()
+                .optional()
+                .matches(/[a-zA-Z ]$/, "Ingrese un nombre de ciudad válido."),
+            direccion: Yup.string()
+                .optional()
+                .matches(/[a-zA-Z0-9 ]$/, "Ingrese una dirección válida."),
+            telefono: Yup.string()
+                .matches(/[0-9-+]$/, "Ingrese un número de teléfono válido.")
+                .optional(),
+        }),
+        onSubmit: values => {
+            setDoc(doc(database, "usuarios", values.usuario), values)
             navigate("/login")
         }
-    }
+    })
+
+    formik.values.fechaNacimiento = date
 
     return (
         <>
             <div className="formSignin">
-                <form className='formContainer' onSubmit={handleSubmit}>
+                <form className='formContainer' onSubmit={formik.handleSubmit}>
                     <div className='formItem'>
                         <label htmlFor="usuario" className='formContainer__text'>Nombre de usuario:</label>
-                        <input type="text" name="usuario" className="formInput" onChange={handleChange} />
-                        {usuarioVal || <p className='errorMsj'>El nombre de usuario debe poseer entre 8 y 15 caracteres alfanuméricos.</p>}
+                        <input type="text" {...formik.getFieldProps("usuario")} />
+                        {formik.touched.usuario && formik.errors.usuario ? <p className='errorMsj'>{formik.errors.usuario}</p> : null}
                     </div>
                     <div className='formItem'>
                         <label htmlFor="pass" className='formContainer__text'>Contraseña:</label>
-                        <input type="password" name="pass" className="formInput" onChange={handleChange} />
-                        {passVal || <p className='errorMsj'>La contraseña debe tener un mínimo de 8 caracteres y poseer al menos un número, una letra mayúscula y una minúscula.</p>}
+                        <input type="password" {...formik.getFieldProps("pass")} />
+                        {formik.touched.pass && formik.errors.pass ? <p className='errorMsj'>{formik.errors.pass}</p> : null}
                     </div>
                     <div className='formItem'>
                         <label htmlFor="passCheck" className='formContainer__text'>Confirmar contraseña:</label>
-                        <input type="password" name="passCheck" className="formInput" onChange={handleChange} />
-                        {passCheckVal || <p className='errorMsj'>La contraseña y su confirmación deben coincidir.</p>}
+                        <input type="password" {...formik.getFieldProps("passCheck")} />
+                        {formik.touched.passCheck && formik.errors.passCheck ? <p className='errorMsj'>{formik.errors.passCheck}</p> : null}
                     </div>
                     <div className='formItem'>
                         <label htmlFor="email" className='formContainer__text'>Email:</label>
-                        <input type="text" name="email" className="formInput" onChange={handleChange} />
-                        {emailVal || <p className='errorMsj'>Ingrese un email válido.</p>}
+                        <input type="text" {...formik.getFieldProps("email")} />
+                        {formik.touched.email && formik.errors.email ? <p className='errorMsj'>{formik.errors.email}</p> : null}
                     </div>
                     <div className='formItem'>
                         <label htmlFor="nombre" className='formContainer__text'>Nombre:</label>
-                        <input type="text" name="nombre" className="formInput" onChange={handleChange} />
-                        {nombreVal || <p className='errorMsj'>Ingrese un nombre válido.</p>}
+                        <input type="text" {...formik.getFieldProps("nombre")} />
+                        {formik.touched.nombre && formik.errors.nombre ? <p className='errorMsj'>{formik.errors.nombre}</p> : null}
                     </div>
                     <div className='formItem'>
                         <label htmlFor="apellido" className='formContainer__text'>Apellido:</label>
-                        <input type="text" name="apellido" className="formInput" onChange={handleChange} />
-                        {apellidoVal || <p className='errorMsj'>Ingrese un apellido válido.</p>}
+                        <input type="text" {...formik.getFieldProps("apellido")} />
+                        {formik.touched.apellido && formik.errors.apellido ? <p className='errorMsj'>{formik.errors.apellido}</p> : null}
                     </div>
-                    <div className='formItem fecha'>
+                    <div className='formDate'>
                         <p className='formContainer__text'>Fecha de nacimiento:</p>
                         <DatePicker onChange={setDate} value={date} />
                     </div>
                     <h3>Los siguientes datos se solicitan para enviarle nuestros productos, pero puede ser completado más adelante.</h3>
                     <div className='formItem'>
                         <label htmlFor="pais" className='formContainer__text'>Pais de residencia:</label>
-                        <input type="text" name="pais" className="formInput" onChange={handleChange} />
-                        {paisVal || <p className='errorMsj'>Ingrese un nombre de país válido.</p>}
+                        <input type="text" {...formik.getFieldProps("pais")} />
+                        {formik.touched.pais && formik.errors.pais ? <p className='errorMsj'>{formik.errors.pais}</p> : null}
                     </div>
                     <div className='formItem'>
                         <label htmlFor="provincia" className='formContainer__text'>Provincia:</label>
-                        <input type="text" name="provincia" className="formInput" onChange={handleChange} />
-                        {provinciaVal || <p className='errorMsj'>Ingrese un nombre de provincia válida.</p>}
+                        <input type="text" {...formik.getFieldProps("provincia")} />
+                        {formik.touched.provincia && formik.errors.provincia ? <p className='errorMsj'>{formik.errors.provincia}</p> : null}
                     </div>
                     <div className='formItem'>
                         <label htmlFor="ciudad" className='formContainer__text'>Ciudad:</label>
-                        <input type="text" name="ciudad" className="formInput" onChange={handleChange} />
-                        {ciudadVal || <p className='errorMsj'>Ingrese un nombre de ciudad válida.</p>}
+                        <input type="text" {...formik.getFieldProps("ciudad")} />
+                        {formik.touched.ciudad && formik.errors.ciudad ? <p className='errorMsj'>{formik.errors.ciudad}</p> : null}
                     </div>
                     <div className='formItem'>
                         <label htmlFor="direccion" className='formContainer__text'>Dirección:</label>
-                        <input type="text" name="direccion" className="formInput" onChange={handleChange} />
-                        {direccionVal || <p className='errorMsj'>Ingrese una dirección válida.</p>}
+                        <input type="text" {...formik.getFieldProps("direccion")} />
+                        {formik.touched.direccion && formik.errors.direccion ? <p className='errorMsj'>{formik.errors.direccion}</p> : null}
                     </div>
                     <div className='formItem'>
                         <label htmlFor="telefono" className='formContainer__text'>Teléfono:</label>
-                        <input type="text" name="telefono" className="formInput" onChange={handleChange} />
-                        {telefonoVal || <p className='errorMsj'>Ingrese un número de teléfono válido.</p>}
+                        <input type="text" {...formik.getFieldProps("telefono")} />
+                        {formik.touched.telefono && formik.errors.telefono ? <p className='errorMsj'>{formik.errors.telefono}</p> : null}
                     </div>
                     <div>
-                        <button type='formInput logBtn' className='btn'>Registrarse</button>
+                        <button type='submit' className='btn submitBtn'>Registrarse</button>
                     </div>
                 </form>
             </div>
