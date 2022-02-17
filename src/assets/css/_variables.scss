@@ -41,10 +41,14 @@
     color: var(--var-danger-dark);
     background-color: var(--var-danger-light);
     border: solid 1px var(--var-danger);
+    text-align: justify;
+    padding: 0.2em;
 }
 
 @mixin successContainer {
     color: var(--var-success-dark);
     background-color: var(--var-success-light);
     border: solid 1px var(--var-success);
+    text-align: justify;
+    padding: 0.2em;
 }

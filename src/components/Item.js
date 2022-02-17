@@ -4,14 +4,14 @@ import ItemListContainer from "./ItemListContainer"
 function Item({ id, name, tag, price, img }) {
 
     return (
-        <div className="productsContainer__card">
+        <Link to={`/item/${id}`} element={<ItemListContainer />} className="productsContainer__card">
             <img src={img} alt="" className="productsContainer__img" />
             <div className="productsContainer__text">
-                <Link to={`/item/${id}`} element={<ItemListContainer />} className="productsContainer__Title">{name}</Link>
+                <h3 className="productsContainer__Title">{name}</h3>
                 <p>{tag}</p>
                 <h4>$ {price}</h4>
             </div>
-        </div>
+        </Link>
     )
 }
 

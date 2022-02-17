@@ -114,10 +114,14 @@ main {
             display: flex;
             margin-bottom: 1.5em;
             box-shadow: -7px 7px black;
+            text-decoration: none;
+
+            &:hover {
+                animation: cardItemAnimation 0.4s forwards;
+            }
 
             .productsContainer__img {
                 width: 150px;
-
                 object-fit: cover;
             }
 
@@ -131,15 +135,11 @@ main {
                 font-family: 'Chakra Petch', sans-serif;
 
 
-                a {
+                .productsContainer__Title {
                     font-size: 1.3em;
                     color: black;
                     text-decoration: none;
                     margin: 0;
-
-                    &:hover {
-                        font-weight: 700;
-                    }
                 }
 
                 p {
@@ -188,4 +188,14 @@ main {
         }
     }
 
+}
+
+@keyframes cardItemAnimation {
+    from {
+        background-color: var(--var-highlight);
+    }
+
+    to {
+        background-color: white;
+    }
 }

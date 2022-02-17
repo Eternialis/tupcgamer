@@ -19,7 +19,6 @@ input {
     .formItem {
         display: flex;
         flex-direction: column;
-        margin-bottom: 1em;
         width: 350px;
 
 
@@ -41,25 +40,19 @@ input {
             @include inputDyn;
         }
 
-        .inputError {
+        .errorMsj {
             @include errorContainer;
+            margin-top: 0.5em;
         }
 
     }
 
     .errorMsj {
-        margin-top: 0;
-        text-align: justify;
-        padding: 0.2em;
-        width: 350px;
         @include errorContainer;
     }
 
     .successMsj {
         margin-top: 0;
-        text-align: justify;
-        padding: 0.2em;
-        width: 350px;
         @include successContainer;
     }
 
@@ -96,19 +89,6 @@ input {
                 background-color: var(--var-highlight);
             }
         }
-    }
-}
-
-
-
-#errorMsj {
-    margin-top: 0;
-    text-align: justify;
-    padding: 0.2em;
-    @include errorContainer;
-
-    a {
-        color: black;
     }
 }
 

@@ -34,7 +34,7 @@ function NavBar({ user, img, setInfoUsuario, setSearch, search }) {
             </form>
             {user ?
                 <ul className="links">
-                    <li><Link to={"/mi-perfil"}>Mi perfil</Link></li>
+                    <li><Link to={"/mi-perfil"}>Mis compras</Link></li>
                     <li id="logout" onClick={handleClick}>Cerrar sesión</li>
                 </ul>
                 : null}

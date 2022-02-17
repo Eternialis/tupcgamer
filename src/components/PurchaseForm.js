@@ -23,23 +23,30 @@ const PurchaseForm = ({ infoUsuario, setOrder, setOrderId }) => {
         validationSchema: Yup.object({
             nombre: Yup.string()
                 .min(2, "El nombre debe tener 2 caracteres o más.")
+                .matches(/^[a-zA-ZáéíóúÁÉÍÓÚ ]+$/, "Ingrese un nombre válido.")
                 .required("Obligatorio"),
             apellido: Yup.string()
                 .min(2, "El apellido debe tener 2 caracteres o más.")
+                .matches(/^[a-zA-ZáéíóúÁÉÍÓÚ ]+$/, "Ingrese un apellido válido.")
                 .required("Obligatorio"),
             email: Yup.string()
                 .email("Dirección de mail inválida")
                 .required("Obligatorio"),
             pais: Yup.string()
-                .matches(/[a-zA-Z ]$/, "Ingrese un nombre de país válido."),
+                .matches(/^[a-zA-ZáéíóúÁÉÍÓÚ ]+$/, "Ingrese un nombre de país válido.")
+                .required("Obligatorio"),
             provincia: Yup.string()
-                .matches(/[a-zA-Z ]$/, "Ingrese un nombre de provincia válido."),
+                .matches(/^[a-zA-ZáéíóúÁÉÍÓÚ ]+$/, "Ingrese un nombre de provincia válido.")
+                .required("Obligatorio"),
             ciudad: Yup.string()
-                .matches(/[a-zA-Z ]$/, "Ingrese un nombre de ciudad válido."),
+                .matches(/^[a-zA-ZáéíóúÁÉÍÓÚ ]+$/, "Ingrese un nombre de ciudad válido.")
+                .required("Obligatorio"),
             direccion: Yup.string()
-                .matches(/[a-zA-Z0-9 ]$/, "Ingrese una dirección válida."),
+                .matches(/^[a-zA-ZáéíóúÁÉÍÓÚ0-9 ]+$/, "Ingrese una dirección válida.")
+                .required("Obligatorio"),
             telefono: Yup.string()
-                .matches(/[0-9-+]$/, "Ingrese un número de teléfono válido."),
+                .matches(/^[0-9-+]+$/, "Ingrese un número de teléfono válido.")
+                .required("Obligatorio"),
         }),
         onSubmit: values => {
             const usuario = {
@@ -83,42 +90,42 @@ const PurchaseForm = ({ infoUsuario, setOrder, setOrderId }) => {
             <form className='formContainer' onSubmit={formik.handleSubmit}>
                 <div className='formItem'>
                     <label htmlFor="email" className='formContainer__text'>Email:</label>
-                    <input type="text" {...formik.getFieldProps("email")} />
+                    <input className="formInput" type="text" {...formik.getFieldProps("email")} />
                     {formik.touched.email && formik.errors.email ? <p className='errorMsj'>{formik.errors.email}</p> : null}
                 </div>
                 <div className='formItem'>
                     <label htmlFor="nombre" className='formContainer__text'>Nombre:</label>
-                    <input type="text" {...formik.getFieldProps("nombre")} />
+                    <input className="formInput" type="text" {...formik.getFieldProps("nombre")} />
                     {formik.touched.nombre && formik.errors.nombre ? <p className='errorMsj'>{formik.errors.nombre}</p> : null}
                 </div>
                 <div className='formItem'>
                     <label htmlFor="apellido" className='formContainer__text'>Apellido:</label>
-                    <input type="text" {...formik.getFieldProps("apellido")} />
+                    <input className="formInput" type="text" {...formik.getFieldProps("apellido")} />
                     {formik.touched.apellido && formik.errors.apellido ? <p className='errorMsj'>{formik.errors.apellido}</p> : null}
                 </div>
                 <div className='formItem'>
                     <label htmlFor="pais" className='formContainer__text'>Pais de residencia:</label>
-                    <input type="text" {...formik.getFieldProps("pais")} />
+                    <input className="formInput" type="text" {...formik.getFieldProps("pais")} />
                     {formik.touched.pais && formik.errors.pais ? <p className='errorMsj'>{formik.errors.pais}</p> : null}
                 </div>
                 <div className='formItem'>
                     <label htmlFor="provincia" className='formContainer__text'>Provincia:</label>
-                    <input type="text" {...formik.getFieldProps("provincia")} />
+                    <input className="formInput" type="text" {...formik.getFieldProps("provincia")} />
                     {formik.touched.provincia && formik.errors.provincia ? <p className='errorMsj'>{formik.errors.provincia}</p> : null}
                 </div>
                 <div className='formItem'>
                     <label htmlFor="ciudad" className='formContainer__text'>Ciudad:</label>
-                    <input type="text" {...formik.getFieldProps("ciudad")} />
+                    <input className="formInput" type="text" {...formik.getFieldProps("ciudad")} />
                     {formik.touched.ciudad && formik.errors.ciudad ? <p className='errorMsj'>{formik.errors.ciudad}</p> : null}
                 </div>
                 <div className='formItem'>
                     <label htmlFor="direccion" className='formContainer__text'>Dirección:</label>
-                    <input type="text" {...formik.getFieldProps("direccion")} />
+                    <input className="formInput" type="text" {...formik.getFieldProps("direccion")} />
                     {formik.touched.direccion && formik.errors.direccion ? <p className='errorMsj'>{formik.errors.direccion}</p> : null}
                 </div>
                 <div className='formItem'>
                     <label htmlFor="telefono" className='formContainer__text'>Teléfono:</label>
-                    <input type="text" {...formik.getFieldProps("telefono")} />
+                    <input className="formInput" type="text" {...formik.getFieldProps("telefono")} />
                     {formik.touched.telefono && formik.errors.telefono ? <p className='errorMsj'>{formik.errors.telefono}</p> : null}
                 </div>
                 <div>
