@@ -38,7 +38,9 @@ A continuación un listado de las dependencias utilizadas en el proyecto.
 |---|---|---|
 |[firebase](https://www.npmjs.com/package/firebase)|9.6.3|Utilizada por su biblioteca de Firestore como base de datos del proyecto.|
 |[react-date-picker](https://www.npmjs.com/package/react-date-picker)|8.3.6|Permite al usuario elegir su fecha de nacimiento dentro de un calendario.|
-|[sass](https://www.npmjs.com/package/sass)|1.46.0|Permite cmodificar el estilo de la página con la extensión .scss|
+|[sass](https://www.npmjs.com/package/sass)|1.46.0|Permite modificar el estilo de la página con la extensión .scss|
+|[formik](https://www.npmjs.com/package/formik)|1.46.0|Usada para manejar los formularios de manera óptima.|
+|[yup](https://www.npmjs.com/package/yup)|1.46.0|Usada para validaciones de inputs.|
 
 # Context
 **Nombre de la variable: `context`** <br>
